@@ -11,6 +11,7 @@ import Foundation
 struct Formula {
     
     enum Operator {
+        
         case plus
         case minus
         
@@ -20,6 +21,15 @@ struct Formula {
                 return "+"
             case .minus:
                 return "-"
+            }
+        }
+        
+        var name: String {
+            switch self {
+            case .plus:
+                return "たしざん"
+            case .minus:
+                return "ひきざん"
             }
         }
     }
