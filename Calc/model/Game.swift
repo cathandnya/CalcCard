@@ -18,7 +18,8 @@ class Game: ObservableObject {
         for left in 0 ..< 9 {
             for right in 0 ..< 9 {
                 let formula = Formula(left: left, right: right, operator: .plus)
-                if formula.result <= 10 {
+                let result = formula.result
+                if result > 0 && result <= 10 {
                     stages.append(formula)
                 }
             }
