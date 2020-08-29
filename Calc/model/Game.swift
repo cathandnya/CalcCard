@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Game: ObservableObject {
+class Game {
     
     var stages: [Formula] = []
 
