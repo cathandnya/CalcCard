@@ -8,6 +8,8 @@
 
 import SwiftUI
 
+fileprivate let TIMER_INTERVAL: TimeInterval = 5
+
 struct GameView: View {
     
     let game: Game
@@ -17,6 +19,7 @@ struct GameView: View {
     @State var showingAlert = false
     @State var answer: Answer?
     @State var results: [Answer] = []
+    @State var timer: Timer?
 
     var body: some View {
         VStack {
@@ -26,6 +29,10 @@ struct GameView: View {
             NumbersView() { result in
                 let answer = Answer(formula: self.formula, answer: result)
                 self.results.append(answer)
+                
+                self.timer?.invalidate()
+                self.timer = nil
+                
                 if answer.isCollect {
                     self.next()
                 } else {
@@ -37,7 +44,7 @@ struct GameView: View {
         .alert(isPresented: $showingAlert) {
             if let answer = self.answer {
                 return Alert(
-                    title: Text("まちがい！"),
+                    title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
                     message: Text("答えは\(answer.formula.result)です。"),
                     dismissButton: .default(Text("はい"), action: {
                         self.next()
@@ -51,6 +58,9 @@ struct GameView: View {
                     }))
             }
         }
+        .onAppear {
+            self.startTimer()
+        }
     }
     
     func next() {
@@ -60,6 +70,18 @@ struct GameView: View {
             return
         }
         formula = game.pop()
+        
+        startTimer()
+    }
+    
+    func startTimer() {
+        timer = Timer.scheduledTimer(withTimeInterval: TIMER_INTERVAL, repeats: false) { (_) in
+            let answer = Answer(formula: self.formula, answer: nil)
+            self.results.append(answer)
+            self.timer = nil
+            self.answer = answer
+            self.showingAlert = true
+        }
     }
     
     var score: Int {

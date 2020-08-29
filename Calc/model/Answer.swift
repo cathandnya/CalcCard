@@ -11,7 +11,7 @@ import Foundation
 struct Answer {
     
     let formula: Formula
-    let answer: Int
+    let answer: Int?
     
     var isCollect: Bool {
         answer == formula.result
