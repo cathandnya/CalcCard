@@ -49,13 +49,13 @@ struct ContentView: View {
     func plusView() -> GameView {
         let game = Game()
         game.setupPlus()
-        return GameView(game: game, formula: game.pop())
+        return GameView(game: game, formula: game.pop(), time: nil)
     }
 
     func minusView() -> GameView {
         let game = Game()
         game.setupMinus()
-        return GameView(game: game, formula: game.pop())
+        return GameView(game: game, formula: game.pop(), time: nil)
     }
 }
 

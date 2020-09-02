@@ -8,12 +8,12 @@
 
 import SwiftUI
 
-fileprivate let TIMER_INTERVAL: TimeInterval = 5
-
 struct GameView: View {
     
     let game: Game
     @State var formula: Formula
+    let time: TimeInterval?
+
     @Environment(\.presentationMode) var presentationMode
 
     @State var showingAlert = false
@@ -47,7 +47,10 @@ struct GameView: View {
                     title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
                     message: Text("答えは\(answer.formula.result)です。"),
                     dismissButton: .default(Text("はい"), action: {
-                        self.next()
+                        self.showingAlert = false
+                        DispatchQueue.main.async {
+                            self.next()
+                        }
                     }))
             } else {
                 return Alert(
@@ -75,7 +78,10 @@ struct GameView: View {
     }
     
     func startTimer() {
-        timer = Timer.scheduledTimer(withTimeInterval: TIMER_INTERVAL, repeats: false) { (_) in
+        guard let time = time else {
+            return
+        }
+        timer = Timer.scheduledTimer(withTimeInterval: time, repeats: false) { (_) in
             let answer = Answer(formula: self.formula, answer: nil)
             self.results.append(answer)
             self.timer = nil
@@ -92,6 +98,6 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
-        GameView(game: PlusGame(), formula: Formula(left: 8, right: 6, operator: .minus))
+        GameView(game: PlusGame(), formula: Formula(left: 8, right: 6, operator: .minus), time: nil)
     }
 }
