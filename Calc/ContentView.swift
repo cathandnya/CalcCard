@@ -41,6 +41,12 @@ struct ContentView: View {
                     }
                 }
                 Spacer()
+                HStack {
+                    Spacer()
+                    Text("Version: \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String) (\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String))")
+                        .font(.system(size: 12))
+                    Spacer()
+                }
             }
             .navigationBarTitle(Text("けいさんカード"))
         }
