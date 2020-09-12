@@ -15,7 +15,7 @@ class Game {
     func setupPlus() {
         stages = []
         
-        for left in 0 ..< 9 {
+        for left in 5 ..< 9 {
             for right in 0 ..< 9 {
                 let formula = Formula(left: left, right: right, operator: .plus)
                 let result = formula.result
@@ -29,7 +29,7 @@ class Game {
     func setupMinus() {
         stages = []
 
-        for left in 1 ..< 10 {
+        for left in 5 ..< 10 {
             for right in 0 ..< 10 {
                 let formula = Formula(left: left, right: right, operator: .minus)
                 if formula.result > 0 {

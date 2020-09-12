@@ -55,7 +55,7 @@ struct GameView: View {
             } else {
                 return Alert(
                     title: Text("おわり"),
-                    message: Text("\(self.score)点"),
+                    message: Text(self.resultText),
                     dismissButton: .default(Text("はい"), action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }))
@@ -90,8 +90,13 @@ struct GameView: View {
         }
     }
     
-    var score: Int {
-        Int(round(100 * Float(results.filter({ $0.isCollect }).count) / Float(results.count)))
+    var resultText: String {
+        let failuerCount = results.filter({ !$0.isCollect }).count
+        if failuerCount == 0 {
+            return "全問正解です。"
+        } else {
+            return "\(results.count)問中\(failuerCount)個間違えました。"
+        }
     }
 }
 
