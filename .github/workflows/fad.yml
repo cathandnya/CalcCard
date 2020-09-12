@@ -1,5 +1,8 @@
 name: AdHoc Distribution
 
+on:
+  deployment
+
 jobs:
   build:
 
