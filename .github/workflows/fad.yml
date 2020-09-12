@@ -2,7 +2,7 @@ name: AdHoc Distribution
 
 on:
   push:
-    branches:
+    page_build:
       - master
 
 jobs:
