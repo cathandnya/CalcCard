@@ -1,11 +1,9 @@
 name: AdHoc Distribution
 
 on:
-  pull_request:
+  push:
     branches:
       - master
-    types:
-      - closed
 
 jobs:
   build:
