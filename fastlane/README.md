@@ -16,6 +16,11 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
+### ios adhoc
+```
+fastlane ios adhoc
+```
+Archive AdHoc and send to Firebase
 ### ios fad
 ```
 fastlane ios fad
