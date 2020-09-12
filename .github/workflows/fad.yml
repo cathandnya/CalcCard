@@ -1,62 +1,51 @@
-# This is a basic workflow to help you get started with Actions
+name: AdHoc Distribution
 
-name: CI
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
-  push:
+  pull_request:
     branches:
-      - release
+      - master
+    types:
+      - closed
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v1 # 1: MarketplaceのActionの利用
-    - name: Select Xcode
-      run: sudo xcode-select -s '/Applications/Xcode_11.2.1.app/Contents/Developer'
-    # 2: キャッシュを使う
-    - uses: actions/cache@v1
+    - uses: actions/checkout@v2
+
+    # Firebaseのため
+    - uses: actions/setup-node@v1
       with:
-        path: Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-pods-
-    - name: Pod Install
-      if: steps.cache-cocoapods.outputs.cache-hit != 'true'
-      run: pod install
-    # 4: fastlaneで必要なため、SSHキーのセットアップをする
-    - name: Setup SSH Keys and known_hosts for fastlane match
-      # Copied from https://github.com/maddox/actions/blob/master/ssh/entrypoint.sh
+        node-version: '10.x'
+      
+    - name: Bundle Install
+      run: bundle install
+
+    - name: Select Xcode version
+      run: sudo xcode-select -s '/Applications/Xcode_11.7.app'
+
+    - name: Show Xcode version
+      run: xcodebuild -version
+
+    - name: Keychain.p12
       run: |
-        SSH_PATH="$HOME/.ssh"
+        echo "${{ secrets.CERTIFICATE_P12 }}" > ios_distribution.p12.txt
+        base64 --decode ios_distribution.p12.txt > ios_distribution.p12
 
-        mkdir -p "$SSH_PATH"
-        touch "$SSH_PATH/known_hosts"
+    - name: ProvisioningProfile
+      run: |
+        echo "${{ secrets.PROVISIONING_PROFILE }}" > adhoc.mobileprovision.txt
+        base64 --decode adhoc.mobileprovision.txt > adhoc.mobileprovision
 
-        echo "$PRIVATE_KEY" > "$SSH_PATH/id_rsa"
+    - name: list files
+      run: ls -l
 
-        chmod 700 "$SSH_PATH"
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        chmod 600 "$SSH_PATH/known_hosts"
-        chmod 600 "$SSH_PATH/id_rsa"
-
-        eval $(ssh-agent)
-        ssh-add "$SSH_PATH/id_rsa"
+    - name: Adhoc
       env:
-        # 3: 秘匿情報の受け渡し
-        PRIVATE_KEY: ${{ secrets.GITHUB_ACTIONS_SSH_PRIVATE_KEY }}
-
-    - name: Run Fastlane - Deploy to AppStore Connect
-      run: fastlane appstore_release
-      env:
-        TEAM_ID: ${{ secrets.TEAM_ID }}
-        APPLE_ID: ${{ secrets.APPLE_ID }}
-        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
-        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      run: |
+        npm install -g firebase-tools
+        bundle exec fastlane adhoc
