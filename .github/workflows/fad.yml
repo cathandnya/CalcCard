@@ -1,10 +1,5 @@
 name: AdHoc Distribution
 
-on:
-  push:
-    page_build:
-      - master
-
 jobs:
   build:
 
