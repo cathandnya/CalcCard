@@ -19,6 +19,7 @@
 		0E4CDAAB24F9096200A4F279 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAA24F9096200A4F279 /* GameView.swift */; };
 		0E4CDAAD24F90B0E00A4F279 /* CalculationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */; };
 		0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */; };
+		0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		0E4CDAAA24F9096200A4F279 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationCardView.swift; sourceTree = "<group>"; };
 		0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
+		0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				0E4CDAAA24F9096200A4F279 /* GameView.swift */,
 				0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */,
 				0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */,
+				0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */,
 				0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */,
 				0E4CDA9A24F8F7CD00A4F279 /* LaunchScreen.storyboard */,
 				0E4CDA9D24F8F7CD00A4F279 /* Info.plist */,
@@ -179,6 +182,7 @@
 				0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */,
 				0E4CDA9224F8F7C700A4F279 /* SceneDelegate.swift in Sources */,
 				0E4CDAA924F8FE5000A4F279 /* Answer.swift in Sources */,
+				0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */,
 				0E4CDAA524F8F86B00A4F279 /* Formula.swift in Sources */,
 				0E4CDA9424F8F7C700A4F279 /* ContentView.swift in Sources */,
 				0E4CDAAB24F9096200A4F279 /* GameView.swift in Sources */,

@@ -20,11 +20,15 @@ struct GameView: View {
     @State var answer: Answer?
     @State var results: [Answer] = []
     @State var timer: Timer?
+    @ObservedObject var voiceRecognizer = VoiceRecognizer()
 
     var body: some View {
         VStack {
             Spacer()
             CalculationCardView(formula: formula)
+            if self.voiceRecognizer.result != nil {
+                Text(self.voiceRecognizer.result!.bestTranscription.formattedString)
+            }
             Spacer()
             NumbersView() { result in
                 let answer = Answer(formula: self.formula, answer: result)
@@ -63,6 +67,16 @@ struct GameView: View {
         }
         .onAppear {
             self.startTimer()
+            self.voiceRecognizer.prepare { (b) in
+                if (b) {
+                    self.voiceRecognizer.start()
+                } else {
+                    
+                }
+            }
+        }
+        .onDisappear {
+            self.voiceRecognizer.stop()
         }
     }
     
