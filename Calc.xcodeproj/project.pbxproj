@@ -20,10 +20,12 @@
 		0E4CDAAD24F90B0E00A4F279 /* CalculationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */; };
 		0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */; };
 		0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */; };
+		0EB10CD3250D016500251C3D /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB10CD2250D016500251C3D /* AnswerView.swift */; };
+		0EF0CEF3250CFF7000AC261A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0E4CDA8C24F8F7C700A4F279 /* けいさんカード.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "けいさんカード.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E4CDA8C24F8F7C700A4F279 /* CalcCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalcCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E4CDA8F24F8F7C700A4F279 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E4CDA9124F8F7C700A4F279 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0E4CDA9324F8F7C700A4F279 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -38,6 +40,8 @@
 		0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationCardView.swift; sourceTree = "<group>"; };
 		0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
 		0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognizer.swift; sourceTree = "<group>"; };
+		0EB10CD2250D016500251C3D /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
+		0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +66,7 @@
 		0E4CDA8D24F8F7C700A4F279 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0E4CDA8C24F8F7C700A4F279 /* けいさんカード.app */,
+				0E4CDA8C24F8F7C700A4F279 /* CalcCard.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,10 +80,12 @@
 				0E4CDAAA24F9096200A4F279 /* GameView.swift */,
 				0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */,
 				0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */,
+				0EB10CD2250D016500251C3D /* AnswerView.swift */,
 				0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */,
 				0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */,
 				0E4CDA9A24F8F7CD00A4F279 /* LaunchScreen.storyboard */,
 				0E4CDA9D24F8F7CD00A4F279 /* Info.plist */,
+				0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */,
 				0E4CDAA324F8F83B00A4F279 /* model */,
 				0E4CDA9724F8F7CD00A4F279 /* Preview Content */,
 			);
@@ -121,7 +127,7 @@
 			);
 			name = Calc;
 			productName = Calc;
-			productReference = 0E4CDA8C24F8F7C700A4F279 /* けいさんカード.app */;
+			productReference = 0E4CDA8C24F8F7C700A4F279 /* CalcCard.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -164,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E4CDA9C24F8F7CD00A4F279 /* LaunchScreen.storyboard in Resources */,
+				0EF0CEF3250CFF7000AC261A /* InfoPlist.strings in Resources */,
 				0E4CDA9924F8F7CD00A4F279 /* Preview Assets.xcassets in Resources */,
 				0E4CDA9624F8F7CD00A4F279 /* Assets.xcassets in Resources */,
 			);
@@ -183,6 +190,7 @@
 				0E4CDA9224F8F7C700A4F279 /* SceneDelegate.swift in Sources */,
 				0E4CDAA924F8FE5000A4F279 /* Answer.swift in Sources */,
 				0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */,
+				0EB10CD3250D016500251C3D /* AnswerView.swift in Sources */,
 				0E4CDAA524F8F86B00A4F279 /* Formula.swift in Sources */,
 				0E4CDA9424F8F7C700A4F279 /* ContentView.swift in Sources */,
 				0E4CDAAB24F9096200A4F279 /* GameView.swift in Sources */,
@@ -334,7 +342,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.cathand.Calc;
-				PRODUCT_NAME = "けいさんカード";
+				PRODUCT_NAME = CalcCard;
 				PROVISIONING_PROFILE_SPECIFIER = "CalcCard AdHoc";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -358,7 +366,7 @@
 				);
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.cathand.Calc;
-				PRODUCT_NAME = "けいさんカード";
+				PRODUCT_NAME = CalcCard;
 				PROVISIONING_PROFILE_SPECIFIER = "CalcCard AdHoc";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
