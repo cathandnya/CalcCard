@@ -20,29 +20,15 @@ struct GameView: View {
     @State var answer: Answer?
     @State var results: [Answer] = []
     @State var timer: Timer?
-    @ObservedObject var voiceRecognizer = VoiceRecognizer()
+    @State var voiceRecognizer: VoiceRecognizer?
 
     var body: some View {
         VStack {
             Spacer()
             CalculationCardView(formula: formula)
-            if self.voiceRecognizer.result != nil {
-                Text(self.voiceRecognizer.result!.bestTranscription.formattedString)
-            }
             Spacer()
             NumbersView() { result in
-                let answer = Answer(formula: self.formula, answer: result)
-                self.results.append(answer)
-                
-                self.timer?.invalidate()
-                self.timer = nil
-                
-                if answer.isCollect {
-                    self.next()
-                } else {
-                    self.answer = answer
-                    self.showingAlert = true
-                }
+                self.answer(result: result)
             }
         }
         .alert(isPresented: $showingAlert) {
@@ -67,16 +53,48 @@ struct GameView: View {
         }
         .onAppear {
             self.startTimer()
-            self.voiceRecognizer.prepare { (b) in
+            VoiceRecognizer.prepare { (b) in
                 if (b) {
-                    self.voiceRecognizer.start()
+                    self.voiceStart()
                 } else {
                     
                 }
             }
         }
         .onDisappear {
-            self.voiceRecognizer.stop()
+            self.voiceRecognizer?.stop()
+        }
+    }
+    
+    func voiceStart() {
+        voiceRecognizer = VoiceRecognizer()
+        _ = try? voiceRecognizer?.start {
+            self.voice(result: $0)
+        }
+    }
+    
+    func voice(result: Int?) {
+        print("voice: \(String(describing: result))")
+        self.voiceRecognizer = nil
+        guard let result = result else {
+            voiceStart()
+            return
+        }
+        answer(result: result)
+    }
+    
+    func answer(result: Int) {
+        let answer = Answer(formula: self.formula, answer: result)
+        self.results.append(answer)
+        
+        self.timer?.invalidate()
+        self.timer = nil
+        
+        if answer.isCollect {
+            self.next()
+        } else {
+            self.answer = answer
+            self.showingAlert = true
         }
     }
     
@@ -89,6 +107,7 @@ struct GameView: View {
         formula = game.pop()
         
         startTimer()
+        voiceStart()
     }
     
     func startTimer() {
