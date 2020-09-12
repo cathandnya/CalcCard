@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0E4CDA8B24F8F7C700A4F279"
-               BuildableName = "&#x3051;&#x3044;&#x3055;&#x3093;&#x30ab;&#x30fc;&#x30c8;&#x3099;.app"
+               BuildableName = "CalcCard.app"
                BlueprintName = "Calc"
                ReferencedContainer = "container:Calc.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0E4CDA8B24F8F7C700A4F279"
-            BuildableName = "&#x3051;&#x3044;&#x3055;&#x3093;&#x30ab;&#x30fc;&#x30c8;&#x3099;.app"
+            BuildableName = "CalcCard.app"
             BlueprintName = "Calc"
             ReferencedContainer = "container:Calc.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0E4CDA8B24F8F7C700A4F279"
-            BuildableName = "&#x3051;&#x3044;&#x3055;&#x3093;&#x30ab;&#x30fc;&#x30c8;&#x3099;.app"
+            BuildableName = "CalcCard.app"
             BlueprintName = "Calc"
             ReferencedContainer = "container:Calc.xcodeproj">
          </BuildableReference>

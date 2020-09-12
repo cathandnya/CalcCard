@@ -20,6 +20,7 @@ struct GameView: View {
     @State var answer: Answer?
     @State var results: [Answer] = []
     @State var timer: Timer?
+    @State var voiceRecognizer: VoiceRecognizer?
 
     var body: some View {
         VStack {
@@ -27,18 +28,7 @@ struct GameView: View {
             CalculationCardView(formula: formula)
             Spacer()
             NumbersView() { result in
-                let answer = Answer(formula: self.formula, answer: result)
-                self.results.append(answer)
-                
-                self.timer?.invalidate()
-                self.timer = nil
-                
-                if answer.isCollect {
-                    self.next()
-                } else {
-                    self.answer = answer
-                    self.showingAlert = true
-                }
+                self.answer(result: result)
             }
         }
         .alert(isPresented: $showingAlert) {
@@ -63,6 +53,54 @@ struct GameView: View {
         }
         .onAppear {
             self.startTimer()
+            VoiceRecognizer.prepare { (b) in
+                if (b) {
+                    self.voiceStart()
+                } else {
+                    
+                }
+            }
+        }
+        .onDisappear {
+            self.voiceRecognizer?.stop()
+        }
+    }
+    
+    func voiceStart() {
+        voiceRecognizer = VoiceRecognizer()
+        _ = try? voiceRecognizer?.start {
+            self.voice(result: $0)
+        }
+    }
+    
+    func voice(result: Result<Int?, Error>) {
+        self.voiceRecognizer = nil
+        
+        switch result {
+        case .success(let result):
+            print("voice: \(String(describing: result))")
+            guard let result = result else {
+                voiceStart()
+                return
+            }
+            answer(result: result)
+        case .failure(let error):
+            print("voice error: \(error)")
+        }
+    }
+    
+    func answer(result: Int) {
+        let answer = Answer(formula: self.formula, answer: result)
+        self.results.append(answer)
+        
+        self.timer?.invalidate()
+        self.timer = nil
+        
+        if answer.isCollect {
+            self.next()
+        } else {
+            self.answer = answer
+            self.showingAlert = true
         }
     }
     
@@ -75,6 +113,7 @@ struct GameView: View {
         formula = game.pop()
         
         startTimer()
+        voiceStart()
     }
     
     func startTimer() {
