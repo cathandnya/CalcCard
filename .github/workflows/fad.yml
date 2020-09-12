@@ -1,0 +1,62 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches:
+      - release
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v1 # 1: MarketplaceのActionの利用
+    - name: Select Xcode
+      run: sudo xcode-select -s '/Applications/Xcode_11.2.1.app/Contents/Developer'
+    # 2: キャッシュを使う
+    - uses: actions/cache@v1
+      with:
+        path: Pods
+        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pods-
+    - name: Pod Install
+      if: steps.cache-cocoapods.outputs.cache-hit != 'true'
+      run: pod install
+    # 4: fastlaneで必要なため、SSHキーのセットアップをする
+    - name: Setup SSH Keys and known_hosts for fastlane match
+      # Copied from https://github.com/maddox/actions/blob/master/ssh/entrypoint.sh
+      run: |
+        SSH_PATH="$HOME/.ssh"
+
+        mkdir -p "$SSH_PATH"
+        touch "$SSH_PATH/known_hosts"
+
+        echo "$PRIVATE_KEY" > "$SSH_PATH/id_rsa"
+
+        chmod 700 "$SSH_PATH"
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        chmod 600 "$SSH_PATH/known_hosts"
+        chmod 600 "$SSH_PATH/id_rsa"
+
+        eval $(ssh-agent)
+        ssh-add "$SSH_PATH/id_rsa"
+      env:
+        # 3: 秘匿情報の受け渡し
+        PRIVATE_KEY: ${{ secrets.GITHUB_ACTIONS_SSH_PRIVATE_KEY }}
+
+    - name: Run Fastlane - Deploy to AppStore Connect
+      run: fastlane appstore_release
+      env:
+        TEAM_ID: ${{ secrets.TEAM_ID }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
