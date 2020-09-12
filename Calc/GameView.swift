@@ -73,14 +73,20 @@ struct GameView: View {
         }
     }
     
-    func voice(result: Int?) {
-        print("voice: \(String(describing: result))")
+    func voice(result: Result<Int?, Error>) {
         self.voiceRecognizer = nil
-        guard let result = result else {
-            voiceStart()
-            return
+        
+        switch result {
+        case .success(let result):
+            print("voice: \(String(describing: result))")
+            guard let result = result else {
+                voiceStart()
+                return
+            }
+            answer(result: result)
+        case .failure(let error):
+            print("voice error: \(error)")
         }
-        answer(result: result)
     }
     
     func answer(result: Int) {

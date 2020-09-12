@@ -15,7 +15,7 @@ class VoiceRecognizer: NSObject, ObservableObject {
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
-    private var handler: ((Int?) -> Void)?
+    private var handler: ((Result<Int?, Error>) -> Void)?
 
     override init() {
         super.init()
@@ -23,6 +23,11 @@ class VoiceRecognizer: NSObject, ObservableObject {
     }
     
     static func prepare(handler: @escaping (Bool) -> Void) {
+        guard SFSpeechRecognizer.authorizationStatus() != .authorized else {
+            handler(true)
+            return
+        }
+        
         SFSpeechRecognizer.requestAuthorization { (status) in
             switch status {
             case .restricted, .denied:
@@ -57,14 +62,16 @@ class VoiceRecognizer: NSObject, ObservableObject {
             if let resultValue = me.parse(result: result) {
                 timer?.invalidate()
                 if error != nil || (result?.isFinal ?? false) {
-                    me.finish(result: resultValue)
+                    me.finish(result: .success(resultValue))
                 } else {
                     timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-                        self?.finish(result: resultValue)
+                        self?.finish(result: .success(resultValue))
                     })
                 }
-            } else if error != nil || (result?.isFinal ?? false) {
-                me.finish(result: nil)
+            } else if let error = error {
+                me.finish(result: .failure(error))
+            } else if result?.isFinal ?? false {
+                me.finish(result: .success(nil))
             }
         }
         
@@ -76,13 +83,13 @@ class VoiceRecognizer: NSObject, ObservableObject {
         try startAudioEngine()
     }
     
-    private func finish(result: Int?) {
+    private func finish(result: Result<Int?, Error>) {
         let inputNode = audioEngine.inputNode
-        audioEngine.stop()
         inputNode.removeTap(onBus: 0)
+        audioEngine.stop()
         
         recognitionRequest = nil
-        recognitionTask = nil
+        //refreshTask()
         
         handler?(result)
     }
@@ -98,6 +105,7 @@ class VoiceRecognizer: NSObject, ObservableObject {
     private func refreshTask() {
         if let recognitionTask = recognitionTask {
             recognitionTask.cancel()
+            recognitionTask.finish()
             self.recognitionTask = nil
         }
     }
@@ -112,7 +120,7 @@ class VoiceRecognizer: NSObject, ObservableObject {
         audioEngine.isRunning
     }
     
-    func start(handler: @escaping (Int?) -> Void) throws {
+    func start(handler: @escaping (Result<Int?, Error>) -> Void) throws {
         guard !isRunning else {
             return
         }
