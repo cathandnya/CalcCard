@@ -11,15 +11,16 @@ import Foundation
 class Game {
     
     var stages: [Formula] = []
+    var answerRange: Range<Int> = Range(1 ... 10)
 
     func setupPlus() {
         stages = []
+        answerRange = Range(11 ... 20)
         
         for left in 5 ..< 9 {
-            for right in 0 ..< 9 {
+            for right in 2 ..< 9 {
                 let formula = Formula(left: left, right: right, operator: .plus)
-                let result = formula.result
-                if result > 0 && result <= 10 {
+                if answerRange.contains(formula.result) {
                     stages.append(formula)
                 }
             }
@@ -28,11 +29,12 @@ class Game {
 
     func setupMinus() {
         stages = []
+        answerRange = Range(1 ... 10)
 
         for left in 5 ..< 10 {
             for right in 0 ..< 10 {
                 let formula = Formula(left: left, right: right, operator: .minus)
-                if formula.result > 0 {
+                if answerRange.contains(formula.result) {
                     stages.append(formula)
                 }
             }

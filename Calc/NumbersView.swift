@@ -10,33 +10,31 @@ import SwiftUI
 
 struct NumbersView: View {
     
+    let ranges: [Range<Int>]
     let handler: (Int) -> Void
+    
+    init(range: Range<Int>, handler: @escaping (Int) -> Void) {
+        self.ranges = [
+            range.lowerBound ..< range.lowerBound + range.count / 2,
+            range.lowerBound + range.count / 2 ..< range.upperBound,
+        ]
+        self.handler = handler
+    }
     
     var body: some View {
         VStack {
-            HStack(spacing: 0) {
-                ForEach(1 ..< 6) { i in
-                    Button(action: {
-                        self.handler(i)
-                    }) {
-                        Text("\(i)")
-                            .font(.system(size: 36, weight: .semibold))
-                            .frame(width: UIScreen.main.bounds.width / 5)
-                            .frame(height: 60)
-                            .border(Color.blue, width: 1)
-                    }
-                }
-            }
-            HStack(spacing: 0) {
-                ForEach(6 ..< 11) { i in
-                    Button(action: {
-                        self.handler(i)
-                    }) {
-                        Text("\(i)")
-                            .font(.system(size: 36, weight: .semibold))
-                            .frame(width: UIScreen.main.bounds.width / 5)
-                            .frame(height: 60)
-                            .border(Color.blue, width: 1)
+            ForEach(0 ..< ranges.count) { i in
+                HStack(spacing: 0) {
+                    ForEach(ranges[i]) { i in
+                        Button(action: {
+                            self.handler(i)
+                        }) {
+                            Text("\(i)")
+                                .font(.system(size: 36, weight: .semibold))
+                                .frame(width: UIScreen.main.bounds.width / 5)
+                                .frame(height: 60)
+                                .border(Color.blue, width: 1)
+                        }
                     }
                 }
             }
@@ -46,7 +44,7 @@ struct NumbersView: View {
 
 struct NumbersView_Previews: PreviewProvider {
     static var previews: some View {
-        NumbersView() { i in
+        NumbersView(range: Range(11 ... 20)) { i in
             
         }
     }

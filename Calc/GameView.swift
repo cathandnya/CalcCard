@@ -27,7 +27,7 @@ struct GameView: View {
             Spacer()
             CalculationCardView(formula: formula)
             Spacer()
-            NumbersView() { result in
+            NumbersView(range: game.answerRange) { result in
                 self.answer(result: result)
             }
         }
