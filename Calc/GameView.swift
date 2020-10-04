@@ -53,24 +53,26 @@ struct GameView: View {
         }
         .onAppear {
             self.startTimer()
+            /*
             VoiceRecognizer.prepare { (b) in
                 if (b) {
                     self.voiceStart()
                 } else {
                     
                 }
-            }
+            }*/
         }
         .onDisappear {
-            self.voiceRecognizer?.stop()
+            //self.voiceRecognizer?.stop()
         }
     }
     
     func voiceStart() {
+        /*
         voiceRecognizer = VoiceRecognizer()
         _ = try? voiceRecognizer?.start {
             self.voice(result: $0)
-        }
+        }*/
     }
     
     func voice(result: Result<Int?, Error>) {
