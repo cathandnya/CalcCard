@@ -32,7 +32,7 @@ struct NumbersView: View {
                             Text("\(i)")
                                 .font(.system(size: 36, weight: .semibold))
                                 .frame(width: UIScreen.main.bounds.width / 5)
-                                .frame(height: 60)
+                                .frame(height: 80)
                                 .border(Color.blue, width: 1)
                         }
                     }

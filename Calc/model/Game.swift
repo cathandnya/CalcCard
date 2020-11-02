@@ -31,10 +31,10 @@ class Game {
         stages = []
         answerRange = Range(1 ... 10)
 
-        for left in 5 ..< 10 {
+        for left in 11 ..< 16 {
             for right in 0 ..< 10 {
                 let formula = Formula(left: left, right: right, operator: .minus)
-                if answerRange.contains(formula.result) {
+                if Range(1 ... 9).contains(formula.result) {
                     stages.append(formula)
                 }
             }
