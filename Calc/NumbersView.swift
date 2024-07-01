@@ -53,7 +53,7 @@ struct NumbersView: View {
                 .padding(.horizontal, 10)
             }
             VStack(spacing: -1) {
-                HStack(spacing: 0) {
+                HStack(spacing: -1) {
                     ForEach(1 ..< 6) { i in
                         Button(action: {
                             digit(num: i)
@@ -66,7 +66,7 @@ struct NumbersView: View {
                         }
                     }
                 }
-                HStack(spacing: 0) {
+                HStack(spacing: -1) {
                     ForEach(6 ..< 11) { i in
                         Button(action: {
                             if i == 10 && mode != .oneDigit {
@@ -92,10 +92,11 @@ struct NumbersView: View {
                     }
                 }
                 if mode == .decimal {
-                    HStack(spacing: 0) {
+                    HStack(spacing: -1) {
                         ForEach(1 ..< 6) { i in
                             if i < 5 {
                                 Color.clear
+                                    .frame(width: UIScreen.main.bounds.width / 5)
                                     .frame(height: 60)
                             } else {
                                 Button(action: {

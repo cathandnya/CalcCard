@@ -40,7 +40,15 @@ class Game {
     }
     
     func setupPi() {
+        stages = PiFormula.items
+    }
+
+    func setupSquare() {
+        stages = []
         
+        for value in 11 ..< 20 {
+            stages.append(SquareFormula(value: value))
+        }
     }
 
     func pop() -> FormulaProtocol {

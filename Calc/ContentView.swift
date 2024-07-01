@@ -12,7 +12,9 @@ struct ContentView: View {
     
     @State private var plusLink = false
     @State private var minusLink = false
-
+    @State private var piLink = false
+    @State private var squareLink = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -41,6 +43,30 @@ struct ContentView: View {
                     }
                 }
                 Spacer()
+                VStack {
+                    Button(action: {
+                        self.piLink = true
+                    }) {
+                        Text("円周率")
+                            .font(.system(size: 32, weight: .semibold))
+                    }
+                    NavigationLink(destination: piView(), isActive: $piLink) {
+                        Color.clear.frame(height: 0)
+                    }
+                }
+                Spacer()
+                VStack {
+                    Button(action: {
+                        self.squareLink = true
+                    }) {
+                        Text("平方数")
+                            .font(.system(size: 32, weight: .semibold))
+                    }
+                    NavigationLink(destination: squareView(), isActive: $squareLink) {
+                        Color.clear.frame(height: 0)
+                    }
+                }
+                Spacer()
                 HStack {
                     Spacer()
                     Text("Version: \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String) (\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String))")
@@ -57,10 +83,22 @@ struct ContentView: View {
         game.setupPlus()
         return GameView(game: game, formula: game.pop(), time: nil)
     }
-
+    
     func minusView() -> GameView {
         let game = Game()
         game.setupMinus()
+        return GameView(game: game, formula: game.pop(), time: nil)
+    }
+    
+    func piView() -> GameView {
+        let game = Game()
+        game.setupPi()
+        return GameView(game: game, formula: game.pop(), time: nil)
+    }
+    
+    func squareView() -> GameView {
+        let game = Game()
+        game.setupSquare()
         return GameView(game: game, formula: game.pop(), time: nil)
     }
 }

@@ -22,6 +22,7 @@
 		0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */; };
 		0EB10CD3250D016500251C3D /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB10CD2250D016500251C3D /* AnswerView.swift */; };
 		0EF0CEF3250CFF7000AC261A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */; };
+		0EF9CF512C32815200089C66 /* DecimalFormula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9CF502C32815200089C66 /* DecimalFormula.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognizer.swift; sourceTree = "<group>"; };
 		0EB10CD2250D016500251C3D /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
 		0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
+		0EF9CF502C32815200089C66 /* DecimalFormula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalFormula.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				0E4CDAA424F8F86B00A4F279 /* Formula.swift */,
+				0EF9CF502C32815200089C66 /* DecimalFormula.swift */,
 				0E4CDAA824F8FE5000A4F279 /* Answer.swift */,
 				0E4CDAA624F8FB6E00A4F279 /* Game.swift */,
 			);
@@ -187,6 +190,7 @@
 				0E4CDA9024F8F7C700A4F279 /* AppDelegate.swift in Sources */,
 				0E4CDAA724F8FB6E00A4F279 /* Game.swift in Sources */,
 				0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */,
+				0EF9CF512C32815200089C66 /* DecimalFormula.swift in Sources */,
 				0E4CDA9224F8F7C700A4F279 /* SceneDelegate.swift in Sources */,
 				0E4CDAA924F8FE5000A4F279 /* Answer.swift in Sources */,
 				0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */,
