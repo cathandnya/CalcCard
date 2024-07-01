@@ -52,6 +52,7 @@ struct GameView: View {
             }
         }
         .onAppear {
+            self.next()
             self.startTimer()
             VoiceRecognizer.prepare { (b) in
                 if (b) {

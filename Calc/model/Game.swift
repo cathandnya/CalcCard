@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import GameplayKit
 
 class Game {
     
     var stages: [FormulaProtocol] = []
+    static let randomSource = GKRandomSource.sharedRandom()
 
     func setupPlus() {
         stages = []
@@ -52,12 +54,17 @@ class Game {
     }
 
     func pop() -> FormulaProtocol {
-        stages.remove(at: Int(arc4random_uniform(UInt32(stages.count))))
+        let randomNumber = Game.randomSource.nextInt(upperBound: stages.count)
+        return stages.remove(at: randomNumber)
     }
     
     var isEmpty: Bool {
         //stages.count < 40
         stages.isEmpty
+    }
+    
+    var initial: FormulaProtocol {
+        stages[0]
     }
 }
 
