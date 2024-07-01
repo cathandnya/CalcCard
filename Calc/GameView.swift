@@ -20,7 +20,6 @@ struct GameView: View {
     @State var answer: Answer?
     @State var results: [Answer] = []
     @State var timer: Timer?
-    @State var voiceRecognizer: VoiceRecognizer?
 
     var body: some View {
         VStack {
@@ -54,42 +53,9 @@ struct GameView: View {
         .onAppear {
             self.next()
             self.startTimer()
-            VoiceRecognizer.prepare { (b) in
-                if (b) {
-                    self.voiceStart()
-                } else {
-                    
-                }
-            }
-        }
-        .onDisappear {
-            self.voiceRecognizer?.stop()
         }
     }
-    
-    func voiceStart() {
-        voiceRecognizer = VoiceRecognizer()
-        _ = try? voiceRecognizer?.start {
-            self.voice(result: $0)
-        }
-    }
-    
-    func voice(result: Result<Int?, Error>) {
-        self.voiceRecognizer = nil
         
-        switch result {
-        case .success(let result):
-            print("voice: \(String(describing: result))")
-            guard let result = result else {
-                voiceStart()
-                return
-            }
-            answer(answer: "\(result)")
-        case .failure(let error):
-            print("voice error: \(error)")
-        }
-    }
-    
     func answer(answer: String) {
         let answer = Answer(formula: formula, answer: answer)
         self.results.append(answer)
@@ -114,10 +80,10 @@ struct GameView: View {
         formula = game.pop()
         
         startTimer()
-        voiceStart()
     }
     
     func startTimer() {
+        /*
         guard let time = time else {
             return
         }
@@ -128,6 +94,7 @@ struct GameView: View {
             self.answer = answer
             self.showingAlert = true
         }
+         */
     }
     
     var resultText: String {
