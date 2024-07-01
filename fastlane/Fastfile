@@ -81,7 +81,7 @@ platform :ios do
     )
     build_app(
       project: "Calc.xcodeproj", 
-      scheme: ENV["SCHEME_NAME"],
+      scheme: "Calc",
       export_method: "app-store",
       export_xcargs: "-allowProvisioningUpdates"
     )
