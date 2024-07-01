@@ -11,7 +11,7 @@ import SwiftUI
 struct GameView: View {
     
     let game: Game
-    @State var formula: Formula
+    @State var formula: FormulaProtocol
     let time: TimeInterval?
 
     @Environment(\.presentationMode) var presentationMode
@@ -27,15 +27,15 @@ struct GameView: View {
             Spacer()
             CalculationCardView(formula: formula)
             Spacer()
-            NumbersView() { result in
-                self.answer(result: result)
+            NumbersView(formula: formula) { result in
+                self.answer(answer: result)
             }
         }
         .alert(isPresented: $showingAlert) {
             if let answer = self.answer {
                 return Alert(
                     title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
-                    message: Text("答えは\(answer.formula.result)です。"),
+                    message: Text("答えは\(answer.formula.correctAnswer)です。"),
                     dismissButton: .default(Text("はい"), action: {
                         self.showingAlert = false
                         DispatchQueue.main.async {
@@ -83,14 +83,14 @@ struct GameView: View {
                 voiceStart()
                 return
             }
-            answer(result: result)
+            answer(answer: "\(result)")
         case .failure(let error):
             print("voice error: \(error)")
         }
     }
     
-    func answer(result: Int) {
-        let answer = Answer(formula: self.formula, answer: result)
+    func answer(answer: String) {
+        let answer = Answer(formula: formula, answer: answer)
         self.results.append(answer)
         
         self.timer?.invalidate()
@@ -121,7 +121,7 @@ struct GameView: View {
             return
         }
         timer = Timer.scheduledTimer(withTimeInterval: time, repeats: false) { (_) in
-            let answer = Answer(formula: self.formula, answer: nil)
+            let answer = Answer(formula: formula, answer: nil)
             self.results.append(answer)
             self.timer = nil
             self.answer = answer

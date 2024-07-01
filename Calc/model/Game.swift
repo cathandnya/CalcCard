@@ -10,7 +10,7 @@ import Foundation
 
 class Game {
     
-    var stages: [Formula] = []
+    var stages: [FormulaProtocol] = []
 
     func setupPlus() {
         stages = []
@@ -38,8 +38,12 @@ class Game {
             }
         }
     }
+    
+    func setupPi() {
+        
+    }
 
-    func pop() -> Formula {
+    func pop() -> FormulaProtocol {
         stages.remove(at: Int(arc4random_uniform(UInt32(stages.count))))
     }
     
