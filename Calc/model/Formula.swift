@@ -8,7 +8,21 @@
 
 import Foundation
 
-struct Formula {
+protocol FormulaProtocol {
+ 
+    var text: String { get }
+    var correctAnswer: String { get }
+    var mode: NumbersView.Mode { get }
+}
+
+extension FormulaProtocol {
+    
+    func check(answer: String) -> Bool {
+        correctAnswer == answer
+    }
+}
+
+struct Formula: FormulaProtocol {
     
     enum Operator {
         
@@ -45,5 +59,24 @@ struct Formula {
         case .minus:
             return left - right
         }
+    }
+    
+    //
+    
+    var text: String {
+        switch self.operator {
+        case .plus:
+            return "\(left) + \(right)"
+        case .minus:
+            return "\(left) - \(right)"
+        }
+    }
+    
+    var correctAnswer: String {
+        "\(result)"
+    }
+    
+    var mode: NumbersView.Mode {
+        .digits
     }
 }

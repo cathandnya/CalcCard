@@ -1,0 +1,15 @@
+{
+  "originHash" : "17c5501bd09cf9cd5728b096b268b2f63f76f54dc34ec192d3dcb9be9853ee26",
+  "pins" : [
+    {
+      "identity" : "swift-system-sound",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/p-x9/swift-system-sound",
+      "state" : {
+        "revision" : "b79e186e19bafe63b482fa257aedabc16063dc3a",
+        "version" : "0.5.0"
+      }
+    }
+  ],
+  "version" : 3
+}

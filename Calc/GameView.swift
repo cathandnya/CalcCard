@@ -7,11 +7,15 @@
 //
 
 import SwiftUI
+import AudioToolbox
+import SystemSound
 
 struct GameView: View {
     
-    let game: Game
-    @State var formula: Formula
+    @ObservedObject var game: Game
+    var formula: FormulaProtocol {
+        game.currentFomula
+    }
     let time: TimeInterval?
 
     @Environment(\.presentationMode) var presentationMode
@@ -20,22 +24,22 @@ struct GameView: View {
     @State var answer: Answer?
     @State var results: [Answer] = []
     @State var timer: Timer?
-    @State var voiceRecognizer: VoiceRecognizer?
 
     var body: some View {
         VStack {
+            Text("\(results.count + 1) / \(results.count + game.stages.count + 1)")
             Spacer()
             CalculationCardView(formula: formula)
             Spacer()
-            NumbersView(range: game.answerRange) { result in
-                self.answer(result: result)
+            NumbersView(formula: formula) { result in
+                self.answer(answer: result)
             }
         }
         .alert(isPresented: $showingAlert) {
             if let answer = self.answer {
                 return Alert(
                     title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
-                    message: Text("答えは\(answer.formula.result)です。"),
+                    message: Text("答えは\(answer.formula.correctAnswer)です。"),
                     dismissButton: .default(Text("はい"), action: {
                         self.showingAlert = false
                         DispatchQueue.main.async {
@@ -52,47 +56,15 @@ struct GameView: View {
             }
         }
         .onAppear {
+            game.reset()
+            results.removeAll()
+            self.next()
             self.startTimer()
-            /*
-            VoiceRecognizer.prepare { (b) in
-                if (b) {
-                    self.voiceStart()
-                } else {
-                    
-                }
-            }*/
-        }
-        .onDisappear {
-            //self.voiceRecognizer?.stop()
         }
     }
-    
-    func voiceStart() {
-        /*
-        voiceRecognizer = VoiceRecognizer()
-        _ = try? voiceRecognizer?.start {
-            self.voice(result: $0)
-        }*/
-    }
-    
-    func voice(result: Result<Int?, Error>) {
-        self.voiceRecognizer = nil
         
-        switch result {
-        case .success(let result):
-            print("voice: \(String(describing: result))")
-            guard let result = result else {
-                voiceStart()
-                return
-            }
-            answer(result: result)
-        case .failure(let error):
-            print("voice error: \(error)")
-        }
-    }
-    
-    func answer(result: Int) {
-        let answer = Answer(formula: self.formula, answer: result)
+    func answer(answer: String) {
+        let answer = Answer(formula: formula, answer: answer)
         self.results.append(answer)
         
         self.timer?.invalidate()
@@ -100,9 +72,11 @@ struct GameView: View {
         
         if answer.isCollect {
             self.next()
+            AudioServicesPlaySystemSound(.tweetSent)
         } else {
             self.answer = answer
             self.showingAlert = true
+            AudioServicesPlaySystemSound(.sIMToolkitNegativeACK)
         }
     }
     
@@ -110,12 +84,12 @@ struct GameView: View {
         guard !game.isEmpty else {
             self.answer = nil
             self.showingAlert = true
+            AudioServicesPlaySystemSound(.fanfare)
             return
         }
-        formula = game.pop()
+        game.next()
         
         startTimer()
-        voiceStart()
     }
     
     func startTimer() {
@@ -123,7 +97,7 @@ struct GameView: View {
             return
         }
         timer = Timer.scheduledTimer(withTimeInterval: time, repeats: false) { (_) in
-            let answer = Answer(formula: self.formula, answer: nil)
+            let answer = Answer(formula: formula, answer: nil)
             self.results.append(answer)
             self.timer = nil
             self.answer = answer
@@ -144,6 +118,6 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
-        GameView(game: PlusGame(), formula: Formula(left: 8, right: 6, operator: .minus), time: nil)
+        GameView(game: Game(mode: .plus), time: nil)
     }
 }

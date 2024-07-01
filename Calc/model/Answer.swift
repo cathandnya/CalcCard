@@ -10,10 +10,13 @@ import Foundation
 
 struct Answer {
     
-    let formula: Formula
-    let answer: Int?
+    let formula: FormulaProtocol
+    let answer: String?
     
     var isCollect: Bool {
-        answer == formula.result
+        guard let answer = answer else {
+            return false
+        }
+        return formula.check(answer: answer)
     }
 }

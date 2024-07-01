@@ -10,17 +10,16 @@ import SwiftUI
 
 struct CalculationCardView: View {
     
-    let formula: Formula
+    let formula: FormulaProtocol
     
     var body: some View {
-        HStack(spacing: 30) {
-            Text("\(formula.left)")
+        HStack(spacing: 0) {
+            Text(formula.text)
                 .font(.system(size: 82, weight: .bold))
-            Text(formula.operator.label)
-                .font(.system(size: 82, weight: .bold))
-            Text("\(formula.right)")
-                .font(.system(size: 82, weight: .bold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.1)
         }
+        .padding(.horizontal, 20)
     }
 }
 
