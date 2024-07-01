@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		0EB10CD3250D016500251C3D /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB10CD2250D016500251C3D /* AnswerView.swift */; };
 		0EF0CEF3250CFF7000AC261A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */; };
 		0EF9CF512C32815200089C66 /* DecimalFormula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9CF502C32815200089C66 /* DecimalFormula.swift */; };
+		0EF9CF542C32B04100089C66 /* SystemSound in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF9CF532C32B04100089C66 /* SystemSound */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EF9CF542C32B04100089C66 /* SystemSound in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +131,9 @@
 			dependencies = (
 			);
 			name = Calc;
+			packageProductDependencies = (
+				0EF9CF532C32B04100089C66 /* SystemSound */,
+			);
 			productName = Calc;
 			productReference = 0E4CDA8C24F8F7C700A4F279 /* CalcCard.app */;
 			productType = "com.apple.product-type.application";
@@ -157,6 +162,9 @@
 				Base,
 			);
 			mainGroup = 0E4CDA8324F8F7C700A4F279;
+			packageReferences = (
+				0EF9CF522C32B04100089C66 /* XCRemoteSwiftPackageReference "swift-system-sound" */,
+			);
 			productRefGroup = 0E4CDA8D24F8F7C700A4F279 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -398,6 +406,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0EF9CF522C32B04100089C66 /* XCRemoteSwiftPackageReference "swift-system-sound" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/p-x9/swift-system-sound";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0EF9CF532C32B04100089C66 /* SystemSound */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0EF9CF522C32B04100089C66 /* XCRemoteSwiftPackageReference "swift-system-sound" */;
+			productName = SystemSound;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0E4CDA8424F8F7C700A4F279 /* Project object */;
 }

@@ -7,11 +7,15 @@
 //
 
 import SwiftUI
+import AudioToolbox
+import SystemSound
 
 struct GameView: View {
     
-    let game: Game
-    @State var formula: FormulaProtocol
+    @ObservedObject var game: Game
+    var formula: FormulaProtocol {
+        game.currentFomula
+    }
     let time: TimeInterval?
 
     @Environment(\.presentationMode) var presentationMode
@@ -23,6 +27,7 @@ struct GameView: View {
 
     var body: some View {
         VStack {
+            Text("\(results.count + 1) / \(results.count + game.stages.count + 1)")
             Spacer()
             CalculationCardView(formula: formula)
             Spacer()
@@ -51,6 +56,8 @@ struct GameView: View {
             }
         }
         .onAppear {
+            game.reset()
+            results.removeAll()
             self.next()
             self.startTimer()
         }
@@ -65,9 +72,11 @@ struct GameView: View {
         
         if answer.isCollect {
             self.next()
+            AudioServicesPlaySystemSound(.tweetSent)
         } else {
             self.answer = answer
             self.showingAlert = true
+            AudioServicesPlaySystemSound(.sIMToolkitNegativeACK)
         }
     }
     
@@ -75,15 +84,15 @@ struct GameView: View {
         guard !game.isEmpty else {
             self.answer = nil
             self.showingAlert = true
+            AudioServicesPlaySystemSound(.fanfare)
             return
         }
-        formula = game.pop()
+        game.next()
         
         startTimer()
     }
     
     func startTimer() {
-        /*
         guard let time = time else {
             return
         }
@@ -94,7 +103,6 @@ struct GameView: View {
             self.answer = answer
             self.showingAlert = true
         }
-         */
     }
     
     var resultText: String {
@@ -110,6 +118,6 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
-        GameView(game: PlusGame(), formula: Formula(left: 8, right: 6, operator: .minus), time: nil)
+        GameView(game: Game(mode: .plus), time: nil)
     }
 }

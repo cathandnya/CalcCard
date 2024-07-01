@@ -9,43 +9,76 @@
 import Foundation
 import GameplayKit
 
-class Game {
+class Game: ObservableObject {
+    
+    enum Mode {
+        case plus
+        case minus
+        case pi
+        case square
+    }
+    
+    let mode: Mode
+    
+    init(mode: Mode) {
+        self.mode = mode
+        reset()
+    }
     
     var stages: [FormulaProtocol] = []
     static let randomSource = GKRandomSource.sharedRandom()
 
-    func setupPlus() {
+    @Published var currentFomula: FormulaProtocol!
+
+    func reset() {
+        switch mode {
+        case .plus:
+            setupPlus()
+        case .minus:
+            setupMinus()
+        case .pi:
+            setupPi()
+        case .square:
+            setupSquare()
+        }
+        currentFomula = stages[0]
+    }
+    
+    private func setupPlus() {
         stages = []
         
-        for left in 5 ..< 9 {
-            for right in 0 ..< 9 {
-                let formula = Formula(left: left, right: right, operator: .plus)
-                let result = formula.result
-                if result > 0 && result <= 10 {
-                    stages.append(formula)
-                }
-            }
+        for _ in 0 ..< 20 {
+            let left = Game.randomSource.nextInt(upperBound: 50)
+            let right = Game.randomSource.nextInt(upperBound: 50)
+            stages.append(Formula(left: left, right: right, operator: .plus))
         }
     }
 
-    func setupMinus() {
+    private func setupMinus() {
         stages = []
 
-        for left in 5 ..< 10 {
-            for right in 0 ..< 10 {
-                let formula = Formula(left: left, right: right, operator: .minus)
-                if formula.result > 0 {
-                    stages.append(formula)
-                }
-            }
+        for _ in 0 ..< 20 {
+            let left = Game.randomSource.nextInt(upperBound: 45) + 5
+            let right = Game.randomSource.nextInt(upperBound: left)
+            stages.append(Formula(left: left, right: right, operator: .minus))
         }
     }
     
-    func setupPi() {
-        stages = PiFormula.items
+    private func setupPi() {
+        stages = [
+            PiFormula(answer: "3.14", text: "3.14 x 1"),
+            PiFormula(answer: "6.28", text: "3.14 x 2"),
+            PiFormula(answer: "9.42", text: "3.14 x 3"),
+            PiFormula(answer: "12.56", text: "3.14 x 4"),
+            PiFormula(answer: "15.7", text: "3.14 x 5"),
+            PiFormula(answer: "18.84", text: "3.14 x 6"),
+            PiFormula(answer: "21.98", text: "3.14 x 7"),
+            PiFormula(answer: "25.12", text: "3.14 x 8"),
+            PiFormula(answer: "28.26", text: "3.14 x 9"),
+        ]
     }
 
-    func setupSquare() {
+    private func setupSquare() {
         stages = []
         
         for value in 11 ..< 20 {
@@ -53,25 +86,13 @@ class Game {
         }
     }
 
-    func pop() -> FormulaProtocol {
+    func next() {
         let randomNumber = Game.randomSource.nextInt(upperBound: stages.count)
-        return stages.remove(at: randomNumber)
+        currentFomula = stages.remove(at: randomNumber)
     }
     
     var isEmpty: Bool {
         //stages.count < 40
         stages.isEmpty
-    }
-    
-    var initial: FormulaProtocol {
-        stages[0]
-    }
-}
-
-class PlusGame: Game {
-    
-    override init() {
-        super.init()
-        setupPlus()
     }
 }

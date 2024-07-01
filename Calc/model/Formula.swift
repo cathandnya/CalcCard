@@ -77,6 +77,6 @@ struct Formula: FormulaProtocol {
     }
     
     var mode: NumbersView.Mode {
-        .oneDigit
+        .digits
     }
 }

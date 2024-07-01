@@ -26,7 +26,7 @@ struct ContentView: View {
                         Text("たしざん")
                             .font(.system(size: 32, weight: .semibold))
                     }
-                    NavigationLink(destination: plusView(), isActive: $plusLink) {
+                    NavigationLink(destination: gameView(mode: .plus), isActive: $plusLink) {
                         Color.clear.frame(height: 0)
                     }
                 }
@@ -38,7 +38,7 @@ struct ContentView: View {
                         Text("ひきざん")
                             .font(.system(size: 32, weight: .semibold))
                     }
-                    NavigationLink(destination: minusView(), isActive: $minusLink) {
+                    NavigationLink(destination: gameView(mode: .minus), isActive: $minusLink) {
                         Color.clear.frame(height: 0)
                     }
                 }
@@ -50,7 +50,7 @@ struct ContentView: View {
                         Text("円周率")
                             .font(.system(size: 32, weight: .semibold))
                     }
-                    NavigationLink(destination: piView(), isActive: $piLink) {
+                    NavigationLink(destination: gameView(mode: .pi), isActive: $piLink) {
                         Color.clear.frame(height: 0)
                     }
                 }
@@ -62,7 +62,7 @@ struct ContentView: View {
                         Text("平方数")
                             .font(.system(size: 32, weight: .semibold))
                     }
-                    NavigationLink(destination: squareView(), isActive: $squareLink) {
+                    NavigationLink(destination: gameView(mode: .square), isActive: $squareLink) {
                         Color.clear.frame(height: 0)
                     }
                 }
@@ -78,28 +78,8 @@ struct ContentView: View {
         }
     }
     
-    func plusView() -> GameView {
-        let game = Game()
-        game.setupPlus()
-        return GameView(game: game, formula: game.initial, time: nil)
-    }
-    
-    func minusView() -> GameView {
-        let game = Game()
-        game.setupMinus()
-        return GameView(game: game, formula: game.initial, time: nil)
-    }
-    
-    func piView() -> GameView {
-        let game = Game()
-        game.setupPi()
-        return GameView(game: game, formula: game.initial, time: nil)
-    }
-    
-    func squareView() -> GameView {
-        let game = Game()
-        game.setupSquare()
-        return GameView(game: game, formula: game.initial, time: nil)
+    func gameView(mode: Game.Mode) -> GameView {
+        GameView(game: .init(mode: mode), time: nil)
     }
 }
 
