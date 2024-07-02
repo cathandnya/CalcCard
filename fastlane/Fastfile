@@ -20,7 +20,7 @@ platform :ios do
     ENV["PROJECT_NAME"] = 'Calc'
     ENV["BUNDLE_ID"] = 'org.cathand.Calc'
     ENV["SCHEME_NAME"] = 'Calc'
-    ENV["PROVISIONING_PROFILE_SPECIFIER"] = 'CalcCard AdHoc'
+    # ENV["PROVISIONING_PROFILE_SPECIFIER"] = 'CalcCard AdHoc'
     ENV["FIREBASE_GROUPS"] = 'tester'
 
     clear_derived_data(derived_data_path: "./DerivedData")
