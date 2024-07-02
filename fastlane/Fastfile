@@ -121,8 +121,8 @@ platform :ios do
     )
     firebase_app_distribution(
       app: ENV["FIREBASE_APP_ID"],
-      groups: ENV["FIREBASE_GROUPS"],
-      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
+      groups: "tester",
+      firebase_cli_token: ENV["FIREBASE_TOKEN"]
     )
   end
 
