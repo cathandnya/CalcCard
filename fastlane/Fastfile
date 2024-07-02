@@ -102,4 +102,28 @@ platform :ios do
       precheck_include_in_app_purchases: false
     ) 
   end
+
+  desc "FAD"
+  lane :fad do
+    increment_build_number(
+      build_number: ENV["BUILD_NUMBER"]
+    )
+    build_app(
+      project: "Calc.xcodeproj", 
+      scheme: "Calc",
+      export_method: "ad-hoc",
+      export_options: {
+        signingStyle: "manual",
+        provisioningProfiles: {
+          "org.cathand.Calc" => "CalcCard AdHoc" 
+        }
+      }
+    )
+    firebase_app_distribution(
+      app: ENV["FIREBASE_APP_ID"],
+      groups: ENV["FIREBASE_GROUPS"],
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
+    )
+  end
+
 end
