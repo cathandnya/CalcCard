@@ -65,23 +65,17 @@ class Game: ObservableObject {
     }
     
     private func setupPi() {
-        stages = [
-            PiFormula(answer: "3.14", text: "3.14 x 1"),
-            PiFormula(answer: "6.28", text: "3.14 x 2"),
-            PiFormula(answer: "9.42", text: "3.14 x 3"),
-            PiFormula(answer: "12.56", text: "3.14 x 4"),
-            PiFormula(answer: "15.7", text: "3.14 x 5"),
-            PiFormula(answer: "18.84", text: "3.14 x 6"),
-            PiFormula(answer: "21.98", text: "3.14 x 7"),
-            PiFormula(answer: "25.12", text: "3.14 x 8"),
-            PiFormula(answer: "28.26", text: "3.14 x 9"),
-        ]
+        stages = []
+        
+        for value in 1 ..< 20 {
+            stages.append(PiFormula(value: value))
+        }
     }
 
     private func setupSquare() {
         stages = []
         
-        for value in 11 ..< 20 {
+        for value in 11 ..< 30 {
             stages.append(SquareFormula(value: value))
         }
     }
