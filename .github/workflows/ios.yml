@@ -19,6 +19,8 @@ jobs:
     - name: Run Fastlane - Deploy to AppStore Connect
       env:
         BUILD_NUMBER: ${{ env.BUILD_NUMBER }}
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       run: |-
         bundle install
         bundle exec fastlane ios fad
