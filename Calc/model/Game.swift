@@ -48,8 +48,8 @@ class Game: ObservableObject {
         stages = []
         
         for _ in 0 ..< 20 {
-            let left = Game.randomSource.nextInt(upperBound: 50)
-            let right = Game.randomSource.nextInt(upperBound: 50)
+            let left = Game.randomSource.nextInt(upperBound: 100)
+            let right = Game.randomSource.nextInt(upperBound: 100)
             stages.append(Formula(left: left, right: right, operator: .plus))
         }
     }
@@ -58,7 +58,7 @@ class Game: ObservableObject {
         stages = []
 
         for _ in 0 ..< 20 {
-            let left = Game.randomSource.nextInt(upperBound: 45) + 5
+            let left = Game.randomSource.nextInt(upperBound: 50) + 50
             let right = Game.randomSource.nextInt(upperBound: left)
             stages.append(Formula(left: left, right: right, operator: .minus))
         }
@@ -67,9 +67,16 @@ class Game: ObservableObject {
     private func setupPi() {
         stages = []
         
-        for value in 1 ..< 20 {
+        for value in 1 ..< 10 {
             stages.append(PiFormula(value: value))
         }
+        for value in 12 ..< 17 {
+            stages.append(PiFormula(value: value))
+        }
+        stages.append(PiFormula(value: 18))
+        stages.append(PiFormula(value: 24))
+        stages.append(PiFormula(value: 25))
+        stages.append(PiFormula(value: 36))
     }
 
     private func setupSquare() {

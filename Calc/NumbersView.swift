@@ -35,82 +35,105 @@ struct NumbersView: View {
                         Image(systemName: "xmark.circle.fill")
                             .font(.system(size: 30))
                     }
+                    .frame(width: 40)
                     .disabled(value.isEmpty)
                     Spacer()
                     Text(value)
                         .font(.system(size: 28))
                     Spacer()
-                    Button {
-                        handler(value)
-                        value = ""
-                    } label: {
-                        Image(systemName: "arrowshape.right.circle.fill")
-                            .font(.system(size: 30))
-                    }
-                    .disabled(value.isEmpty)
+                    Color.clear
+                        .frame(width: 40)
                 }
                 .frame(height: 30)
                 .padding(.horizontal, 10)
             }
             VStack(spacing: -1) {
                 HStack(spacing: -1) {
-                    ForEach(1 ..< 6) { i in
+                    ForEach(1 ..< 4) { i in
                         Button(action: {
                             digit(num: i)
                         }) {
                             Text("\(i)")
                                 .font(.system(size: 36, weight: .semibold))
-                                .frame(width: UIScreen.main.bounds.width / 5)
-                                .frame(height: 60)
+                                .frame(width: 80, height: 80)
                                 .border(Color.blue, width: 1)
                         }
                     }
                 }
                 HStack(spacing: -1) {
-                    ForEach(6 ..< 11) { i in
+                    ForEach(4 ..< 7) { i in
                         Button(action: {
-                            if i == 10 && mode != .oneDigit {
-                                digit(num: 0)
-                            } else {
-                                digit(num: i)
-                            }
+                            digit(num: i)
                         }) {
-                            if i == 10 && mode != .oneDigit {
-                                Text("\(0)")
-                                    .font(.system(size: 36, weight: .semibold))
-                                    .frame(width: UIScreen.main.bounds.width / 5)
-                                    .frame(height: 60)
-                                    .border(Color.blue, width: 1)
-                            } else {
-                                Text("\(i)")
-                                    .font(.system(size: 36, weight: .semibold))
-                                    .frame(width: UIScreen.main.bounds.width / 5)
-                                    .frame(height: 60)
-                                    .border(Color.blue, width: 1)
-                            }
+                            Text("\(i)")
+                                .font(.system(size: 36, weight: .semibold))
+                                .frame(width: 80, height: 80)
+                                .border(Color.blue, width: 1)
                         }
                     }
                 }
-                if mode == .decimal {
-                    HStack(spacing: -1) {
-                        ForEach(1 ..< 6) { i in
-                            if i < 5 {
-                                Color.clear
-                                    .frame(width: UIScreen.main.bounds.width / 5)
-                                    .frame(height: 60)
-                            } else {
-                                Button(action: {
-                                    dot()
-                                }) {
-                                    Text(".")
-                                        .font(.system(size: 36, weight: .semibold))
-                                        .frame(width: UIScreen.main.bounds.width / 5)
-                                        .frame(height: 60)
-                                        .border(Color.blue, width: 1)
-                                }
-                                .disabled(value.isEmpty || value.last == ".")
-                            }
+                HStack(spacing: -1) {
+                    ForEach(7 ..< 10) { i in
+                        Button(action: {
+                            digit(num: i)
+                        }) {
+                            Text("\(i)")
+                                .font(.system(size: 36, weight: .semibold))
+                                .frame(width: 80, height: 80)
+                                .border(Color.blue, width: 1)
                         }
+                    }
+                }
+                HStack(spacing: -1) {
+                    if mode == .oneDigit {
+                        Button(action: {
+                            digit(num: 10)
+                        }) {
+                            Text("\(10)")
+                                .font(.system(size: 36, weight: .semibold))
+                                .frame(width: 80, height: 80)
+                                .border(Color.blue, width: 1)
+                        }
+                    } else {
+                        Button(action: {
+                            digit(num: 0)
+                        }) {
+                            Text("\(0)")
+                                .font(.system(size: 36, weight: .semibold))
+                                .frame(width: 80, height: 80)
+                                .border(Color.blue, width: 1)
+                        }
+                        .disabled(value.isEmpty)
+                    }
+                    if mode == .decimal {
+                        Button(action: {
+                            dot()
+                        }) {
+                            Text(".")
+                                .font(.system(size: 36, weight: .semibold))
+                                .frame(width: 80, height: 80)
+                                .border(Color.blue, width: 1)
+                        }
+                        .disabled(value.isEmpty || value.last == ".")
+                    } else {
+                        Color.clear
+                            .frame(width: 80, height: 80)
+                            .border(Color.blue, width: 1)
+                    }
+                    if mode == .oneDigit {
+                        Color.clear
+                            .frame(width: 80, height: 80)
+                            .border(Color.blue, width: 1)
+                    } else {
+                        Button(action: {
+                            next()
+                        }) {
+                            Image(systemName: "arrowshape.right.fill")
+                                .font(.system(size: 36))
+                                .frame(width: 80, height: 80)
+                                .border(Color.blue, width: 1)
+                        }
+                        .disabled(value.isEmpty)
                     }
                 }
             }
@@ -129,12 +152,17 @@ struct NumbersView: View {
     func dot() {
         value += "."
     }
+    
+    func next() {
+        handler(value)
+        value = ""
+    }
 }
 
 struct NumbersView_Previews: PreviewProvider {
     static var previews: some View {
-        NumbersView(formula: Formula(left: 8, right: 6, operator: .plus)) { i in
-            
-        }
+        NumbersView(formula: Formula(left: 8, right: 6, operator: .plus)) { _ in }
+        NumbersView(formula: Game(mode: .square).currentFomula) { _ in }
+        NumbersView(formula: Game(mode: .pi).currentFomula) { _ in }
     }
 }
