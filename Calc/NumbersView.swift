@@ -41,14 +41,20 @@ struct NumbersView: View {
                     Text(value)
                         .font(.system(size: 28))
                     Spacer()
-                    Color.clear
-                        .frame(width: 40)
+                    Button {
+                        value = String(value.prefix(value.count - 1))
+                    } label: {
+                        Image(systemName: "delete.backward.fill")
+                            .font(.system(size: 30))
+                    }
+                    .frame(width: 40)
+                    .disabled(value.isEmpty)
                 }
                 .frame(height: 30)
                 .padding(.horizontal, 10)
             }
-            VStack(spacing: -1) {
-                HStack(spacing: -1) {
+            VStack(spacing: 8) {
+                HStack(spacing: 8) {
                     ForEach(1 ..< 4) { i in
                         Button(action: {
                             digit(num: i)
@@ -60,7 +66,7 @@ struct NumbersView: View {
                         }
                     }
                 }
-                HStack(spacing: -1) {
+                HStack(spacing: 8) {
                     ForEach(4 ..< 7) { i in
                         Button(action: {
                             digit(num: i)
@@ -72,7 +78,7 @@ struct NumbersView: View {
                         }
                     }
                 }
-                HStack(spacing: -1) {
+                HStack(spacing: 8) {
                     ForEach(7 ..< 10) { i in
                         Button(action: {
                             digit(num: i)
@@ -84,7 +90,7 @@ struct NumbersView: View {
                         }
                     }
                 }
-                HStack(spacing: -1) {
+                HStack(spacing: 8) {
                     if mode == .oneDigit {
                         Button(action: {
                             digit(num: 10)
