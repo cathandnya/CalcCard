@@ -19,7 +19,7 @@
 		0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */; };
 		0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */; };
 		0E93A03D2C3CFF5E0060994D /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E93A03C2C3CFF5E0060994D /* AppView.swift */; };
-		0EB10CD3250D016500251C3D /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB10CD2250D016500251C3D /* AnswerView.swift */; };
+		0E93A03F2C3D05770060994D /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E93A03E2C3D05770060994D /* ResultsView.swift */; };
 		0EF0CEF3250CFF7000AC261A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */; };
 		0EF9CF512C32815200089C66 /* DecimalFormula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9CF502C32815200089C66 /* DecimalFormula.swift */; };
 		0EF9CF542C32B04100089C66 /* SystemSound in Frameworks */ = {isa = PBXBuildFile; productRef = 0EF9CF532C32B04100089C66 /* SystemSound */; };
@@ -40,7 +40,7 @@
 		0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
 		0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognizer.swift; sourceTree = "<group>"; };
 		0E93A03C2C3CFF5E0060994D /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
-		0EB10CD2250D016500251C3D /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
+		0E93A03E2C3D05770060994D /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
 		0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		0EF9CF502C32815200089C66 /* DecimalFormula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalFormula.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,7 +81,7 @@
 				0E4CDAAA24F9096200A4F279 /* GameView.swift */,
 				0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */,
 				0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */,
-				0EB10CD2250D016500251C3D /* AnswerView.swift */,
+				0E93A03E2C3D05770060994D /* ResultsView.swift */,
 				0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */,
 				0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */,
 				0E4CDA9A24F8F7CD00A4F279 /* LaunchScreen.storyboard */,
@@ -195,9 +195,9 @@
 				0E4CDAA724F8FB6E00A4F279 /* Game.swift in Sources */,
 				0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */,
 				0EF9CF512C32815200089C66 /* DecimalFormula.swift in Sources */,
+				0E93A03F2C3D05770060994D /* ResultsView.swift in Sources */,
 				0E4CDAA924F8FE5000A4F279 /* Answer.swift in Sources */,
 				0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */,
-				0EB10CD3250D016500251C3D /* AnswerView.swift in Sources */,
 				0E4CDAA524F8F86B00A4F279 /* Formula.swift in Sources */,
 				0E4CDA9424F8F7C700A4F279 /* ContentView.swift in Sources */,
 				0E4CDAAB24F9096200A4F279 /* GameView.swift in Sources */,

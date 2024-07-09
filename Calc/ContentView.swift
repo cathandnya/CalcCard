@@ -10,8 +10,10 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State var path = NavigationPath()
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             VStack {
                 Spacer()
                 ForEach(Game.Mode.allCases, id: \.self) { mode in
@@ -29,7 +31,11 @@ struct ContentView: View {
             }
             .navigationBarTitle(Text("けいさんカード"))
             .navigationDestination(for: Game.Mode.self) { mode in
-                GameView(game: .init(mode: mode), time: nil)
+                GameView(path: $path, time: nil)
+                    .environmentObject(Game(mode: mode))
+            }
+            .navigationDestination(for: GameResult.self) { value in
+                ResultsView(path: $path, results: value.results)
             }
         }
     }

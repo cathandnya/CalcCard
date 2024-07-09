@@ -8,8 +8,17 @@
 
 import Foundation
 
-struct Answer {
+struct Answer: Identifiable, Hashable {
     
+    static func == (lhs: Answer, rhs: Answer) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+
+    let id: String = NSUUID().uuidString
     let formula: FormulaProtocol
     let answer: String?
     

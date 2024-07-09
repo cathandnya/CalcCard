@@ -11,7 +11,7 @@ import GameplayKit
 
 class Game: ObservableObject {
     
-    enum Mode: CaseIterable {
+    enum Mode: String, CaseIterable {
         case plus
         case minus
         case pi

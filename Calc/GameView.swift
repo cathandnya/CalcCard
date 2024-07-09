@@ -10,13 +10,20 @@ import SwiftUI
 import AudioToolbox
 import SystemSound
 
+struct GameResult: Hashable {
+    
+    let results: [Answer]
+}
+
 struct GameView: View {
     
-    @ObservedObject var game: Game
+    @Binding var path: NavigationPath
+
+    @EnvironmentObject var game: Game
     var formula: FormulaProtocol {
         game.currentFomula
     }
-    let time: TimeInterval?
+    var time: TimeInterval?
 
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.scenePhase) var scenePhase
@@ -42,9 +49,8 @@ struct GameView: View {
                     title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
                     message: Text("答えは\(answer.formula.correctAnswer)です。"),
                     dismissButton: .default(Text("はい"), action: {
-                        self.showingAlert = false
                         DispatchQueue.main.async {
-                            self.next()
+                            next()
                         }
                     }))
             } else {
@@ -52,7 +58,13 @@ struct GameView: View {
                     title: Text("おわり"),
                     message: Text(self.resultText ),
                     dismissButton: .default(Text("はい"), action: {
-                        self.presentationMode.wrappedValue.dismiss()
+                        let failuerCount = results.filter({ !$0.isCollect }).count
+                        if failuerCount == 0 {
+                            self.presentationMode.wrappedValue.dismiss()
+                        } else {
+                            path.removeLast()
+                            path.append(GameResult(results: results))
+                        }
                     }))
             }
         }
@@ -146,6 +158,7 @@ struct GameView: View {
 struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
-        GameView(game: Game(mode: .plus), time: nil)
+        GameView(path: .constant(.init()))
+            .environmentObject(Game(mode: .plus))
     }
 }
