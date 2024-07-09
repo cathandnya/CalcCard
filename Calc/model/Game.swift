@@ -11,11 +11,24 @@ import GameplayKit
 
 class Game: ObservableObject {
     
-    enum Mode {
+    enum Mode: CaseIterable {
         case plus
         case minus
         case pi
         case square
+        
+        var title: String {
+            switch self {
+            case .plus:
+                return "たしざん"
+            case .minus:
+                return "ひきざん"
+            case .pi:
+                return "円周率"
+            case .square:
+                return "平方数"
+            }
+        }
     }
     
     let mode: Mode
@@ -29,6 +42,8 @@ class Game: ObservableObject {
     static let randomSource = GKRandomSource.sharedRandom()
 
     @Published var currentFomula: FormulaProtocol!
+    
+    var time: TimeInterval = 0
 
     func reset() {
         switch mode {
@@ -95,5 +110,20 @@ class Game: ObservableObject {
     var isEmpty: Bool {
         //stages.count < 40
         stages.isEmpty
+    }
+    
+    private var baseDate: Date?
+    
+    func resume() {
+        baseDate = Date()
+    }
+    
+    func pause() {
+        guard let baseDate = baseDate else {
+            return
+        }
+        let now = Date()
+        time += now.timeIntervalSince(baseDate)
+        self.baseDate = nil
     }
 }

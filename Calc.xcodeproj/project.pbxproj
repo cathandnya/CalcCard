@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E4CDA9024F8F7C700A4F279 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDA8F24F8F7C700A4F279 /* AppDelegate.swift */; };
-		0E4CDA9224F8F7C700A4F279 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDA9124F8F7C700A4F279 /* SceneDelegate.swift */; };
 		0E4CDA9424F8F7C700A4F279 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDA9324F8F7C700A4F279 /* ContentView.swift */; };
 		0E4CDA9624F8F7CD00A4F279 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */; };
 		0E4CDA9924F8F7CD00A4F279 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E4CDA9824F8F7CD00A4F279 /* Preview Assets.xcassets */; };
@@ -20,6 +18,7 @@
 		0E4CDAAD24F90B0E00A4F279 /* CalculationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */; };
 		0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */; };
 		0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */; };
+		0E93A03D2C3CFF5E0060994D /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E93A03C2C3CFF5E0060994D /* AppView.swift */; };
 		0EB10CD3250D016500251C3D /* AnswerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB10CD2250D016500251C3D /* AnswerView.swift */; };
 		0EF0CEF3250CFF7000AC261A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */; };
 		0EF9CF512C32815200089C66 /* DecimalFormula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF9CF502C32815200089C66 /* DecimalFormula.swift */; };
@@ -28,8 +27,6 @@
 
 /* Begin PBXFileReference section */
 		0E4CDA8C24F8F7C700A4F279 /* CalcCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalcCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0E4CDA8F24F8F7C700A4F279 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0E4CDA9124F8F7C700A4F279 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		0E4CDA9324F8F7C700A4F279 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E4CDA9824F8F7CD00A4F279 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -42,6 +39,7 @@
 		0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationCardView.swift; sourceTree = "<group>"; };
 		0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
 		0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognizer.swift; sourceTree = "<group>"; };
+		0E93A03C2C3CFF5E0060994D /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		0EB10CD2250D016500251C3D /* AnswerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerView.swift; sourceTree = "<group>"; };
 		0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = InfoPlist.strings; sourceTree = "<group>"; };
 		0EF9CF502C32815200089C66 /* DecimalFormula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalFormula.swift; sourceTree = "<group>"; };
@@ -78,8 +76,7 @@
 		0E4CDA8E24F8F7C700A4F279 /* Calc */ = {
 			isa = PBXGroup;
 			children = (
-				0E4CDA8F24F8F7C700A4F279 /* AppDelegate.swift */,
-				0E4CDA9124F8F7C700A4F279 /* SceneDelegate.swift */,
+				0E93A03C2C3CFF5E0060994D /* AppView.swift */,
 				0E4CDA9324F8F7C700A4F279 /* ContentView.swift */,
 				0E4CDAAA24F9096200A4F279 /* GameView.swift */,
 				0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */,
@@ -193,12 +190,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E93A03D2C3CFF5E0060994D /* AppView.swift in Sources */,
 				0E4CDAAD24F90B0E00A4F279 /* CalculationCardView.swift in Sources */,
-				0E4CDA9024F8F7C700A4F279 /* AppDelegate.swift in Sources */,
 				0E4CDAA724F8FB6E00A4F279 /* Game.swift in Sources */,
 				0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */,
 				0EF9CF512C32815200089C66 /* DecimalFormula.swift in Sources */,
-				0E4CDA9224F8F7C700A4F279 /* SceneDelegate.swift in Sources */,
 				0E4CDAA924F8FE5000A4F279 /* Answer.swift in Sources */,
 				0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */,
 				0EB10CD3250D016500251C3D /* AnswerView.swift in Sources */,
@@ -272,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -326,7 +322,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

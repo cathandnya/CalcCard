@@ -19,6 +19,7 @@ struct GameView: View {
     let time: TimeInterval?
 
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.scenePhase) var scenePhase
 
     @State var showingAlert = false
     @State var answer: Answer?
@@ -49,17 +50,41 @@ struct GameView: View {
             } else {
                 return Alert(
                     title: Text("おわり"),
-                    message: Text(self.resultText),
+                    message: Text(self.resultText ),
                     dismissButton: .default(Text("はい"), action: {
                         self.presentationMode.wrappedValue.dismiss()
                     }))
             }
         }
         .onAppear {
+            print("onAppear")
             game.reset()
             results.removeAll()
             self.next()
             self.startTimer()
+            game.resume()
+        }
+        .onDisappear {
+            print("onDisappear")
+            game.pause()
+        }
+        .onChange(of: scenePhase) { _, phase in
+            switch phase {
+            case .background:
+                print("background")
+                break
+            case .inactive:
+                print("inactive")
+                game.pause()
+                break
+            case .active:
+                print("active")
+                game.resume()
+                break
+            @unknown default:
+                print("default")
+                break
+            }
         }
     }
         
@@ -82,6 +107,7 @@ struct GameView: View {
     
     func next() {
         guard !game.isEmpty else {
+            game.pause()
             self.answer = nil
             self.showingAlert = true
             AudioServicesPlaySystemSound(.fanfare)
@@ -106,11 +132,13 @@ struct GameView: View {
     }
     
     var resultText: String {
+        let sec = Int(game.time)
+        
         let failuerCount = results.filter({ !$0.isCollect }).count
         if failuerCount == 0 {
-            return "全問正解です。"
+            return "全問正解です。\nタイム: \(sec)秒"
         } else {
-            return "\(results.count)問中\(failuerCount)個間違えました。"
+            return "\(results.count)問中\(failuerCount)個間違えました。\nタイム: \(sec)秒"
         }
     }
 }

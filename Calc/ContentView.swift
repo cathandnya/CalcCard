@@ -10,61 +10,14 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var plusLink = false
-    @State private var minusLink = false
-    @State private var piLink = false
-    @State private var squareLink = false
-    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Spacer()
-                VStack {
-                    Button(action: {
-                        self.plusLink = true
-                    }) {
-                        Text("たしざん")
-                            .font(.system(size: 32, weight: .semibold))
-                    }
-                    NavigationLink(destination: gameView(mode: .plus), isActive: $plusLink) {
-                        Color.clear.frame(height: 0)
-                    }
-                }
-                Spacer()
-                VStack {
-                    Button(action: {
-                        self.minusLink = true
-                    }) {
-                        Text("ひきざん")
-                            .font(.system(size: 32, weight: .semibold))
-                    }
-                    NavigationLink(destination: gameView(mode: .minus), isActive: $minusLink) {
-                        Color.clear.frame(height: 0)
-                    }
-                }
-                Spacer()
-                VStack {
-                    Button(action: {
-                        self.piLink = true
-                    }) {
-                        Text("円周率")
-                            .font(.system(size: 32, weight: .semibold))
-                    }
-                    NavigationLink(destination: gameView(mode: .pi), isActive: $piLink) {
-                        Color.clear.frame(height: 0)
-                    }
-                }
-                Spacer()
-                VStack {
-                    Button(action: {
-                        self.squareLink = true
-                    }) {
-                        Text("平方数")
-                            .font(.system(size: 32, weight: .semibold))
-                    }
-                    NavigationLink(destination: gameView(mode: .square), isActive: $squareLink) {
-                        Color.clear.frame(height: 0)
-                    }
+                ForEach(Game.Mode.allCases, id: \.self) { mode in
+                    NavigationLink(mode.title, value: mode)
+                        .font(.system(size: 32, weight: .semibold))
+                        .padding(.vertical, 30)
                 }
                 Spacer()
                 HStack {
@@ -75,11 +28,10 @@ struct ContentView: View {
                 }
             }
             .navigationBarTitle(Text("けいさんカード"))
+            .navigationDestination(for: Game.Mode.self) { mode in
+                GameView(game: .init(mode: mode), time: nil)
+            }
         }
-    }
-    
-    func gameView(mode: Game.Mode) -> GameView {
-        GameView(game: .init(mode: mode), time: nil)
     }
 }
 
