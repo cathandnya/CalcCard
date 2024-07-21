@@ -28,8 +28,7 @@ struct GameView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.scenePhase) var scenePhase
 
-    @State var showingAlert = false
-    @State var answer: Answer?
+    @State private var alert: AlertItem?
     @State var results: [Answer] = []
     @State var timer: Timer?
 
@@ -43,31 +42,7 @@ struct GameView: View {
                 self.answer(answer: result)
             }
         }
-        .alert(isPresented: $showingAlert) {
-            if let answer = self.answer {
-                return Alert(
-                    title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
-                    message: Text("答えは\(answer.formula.correctAnswer)です。"),
-                    dismissButton: .default(Text("はい"), action: {
-                        DispatchQueue.main.async {
-                            next()
-                        }
-                    }))
-            } else {
-                return Alert(
-                    title: Text("おわり"),
-                    message: Text(self.resultText ),
-                    dismissButton: .default(Text("はい"), action: {
-                        let failuerCount = results.filter({ !$0.isCollect }).count
-                        if failuerCount == 0 {
-                            self.presentationMode.wrappedValue.dismiss()
-                        } else {
-                            path.removeLast()
-                            path.append(GameResult(results: results))
-                        }
-                    }))
-            }
-        }
+        .alert(item: $alert, content: { $0.alert })
         .onAppear {
             print("onAppear")
             game.reset()
@@ -111,8 +86,12 @@ struct GameView: View {
             self.next()
             AudioServicesPlaySystemSound(.tweetSent)
         } else {
-            self.answer = answer
-            self.showingAlert = true
+            self.alert = .init(alert: Alert(
+                title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
+                message: Text("答えは\(answer.formula.correctAnswer)です。"),
+                dismissButton: .default(Text("はい"), action: {
+                    next()
+                })))
             AudioServicesPlaySystemSound(.sIMToolkitNegativeACK)
         }
     }
@@ -120,8 +99,18 @@ struct GameView: View {
     func next() {
         guard !game.isEmpty else {
             game.pause()
-            self.answer = nil
-            self.showingAlert = true
+            self.alert = .init(alert: Alert(
+                title: Text("おわり"),
+                message: Text(self.resultText ),
+                dismissButton: .default(Text("はい"), action: {
+                    let failuerCount = results.filter({ !$0.isCollect }).count
+                    if failuerCount == 0 {
+                        self.presentationMode.wrappedValue.dismiss()
+                    } else {
+                        path.removeLast()
+                        path.append(GameResult(results: results))
+                    }
+                })))
             AudioServicesPlaySystemSound(.fanfare)
             return
         }
@@ -138,8 +127,12 @@ struct GameView: View {
             let answer = Answer(formula: formula, answer: nil)
             self.results.append(answer)
             self.timer = nil
-            self.answer = answer
-            self.showingAlert = true
+            self.alert = .init(alert: Alert(
+                title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
+                message: Text("答えは\(answer.formula.correctAnswer)です。"),
+                dismissButton: .default(Text("はい"), action: {
+                    next()
+                })))
         }
     }
     

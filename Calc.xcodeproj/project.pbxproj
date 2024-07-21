@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E19C15F2C4CF3B9003D3CC5 /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E19C15E2C4CF3B9003D3CC5 /* AlertItem.swift */; };
 		0E4CDA9424F8F7C700A4F279 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDA9324F8F7C700A4F279 /* ContentView.swift */; };
 		0E4CDA9624F8F7CD00A4F279 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */; };
 		0E4CDA9924F8F7CD00A4F279 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E4CDA9824F8F7CD00A4F279 /* Preview Assets.xcassets */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E19C15E2C4CF3B9003D3CC5 /* AlertItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
 		0E4CDA8C24F8F7C700A4F279 /* CalcCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalcCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E4CDA9324F8F7C700A4F279 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 				0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */,
 				0E93A03E2C3D05770060994D /* ResultsView.swift */,
 				0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */,
+				0E19C15E2C4CF3B9003D3CC5 /* AlertItem.swift */,
 				0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */,
 				0E4CDA9A24F8F7CD00A4F279 /* LaunchScreen.storyboard */,
 				0E4CDA9D24F8F7CD00A4F279 /* Info.plist */,
@@ -191,6 +194,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0E93A03D2C3CFF5E0060994D /* AppView.swift in Sources */,
+				0E19C15F2C4CF3B9003D3CC5 /* AlertItem.swift in Sources */,
 				0E4CDAAD24F90B0E00A4F279 /* CalculationCardView.swift in Sources */,
 				0E4CDAA724F8FB6E00A4F279 /* Game.swift in Sources */,
 				0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */,
