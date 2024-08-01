@@ -13,7 +13,7 @@ struct NumbersView: View {
     enum Mode {
         case oneDigit
         case digits
-        case decimal
+        case fraction
     }
     
     let formula: FormulaProtocol
@@ -111,7 +111,7 @@ struct NumbersView: View {
                         }
                         .disabled(value.isEmpty)
                     }
-                    if mode == .decimal {
+                    if mode == .fraction {
                         Button(action: {
                             dot()
                         }) {
@@ -150,7 +150,7 @@ struct NumbersView: View {
         switch mode {
         case .oneDigit:
             handler("\(num)")
-        case .digits, .decimal:
+        case .digits, .fraction:
             value += "\(num)"
         }
     }

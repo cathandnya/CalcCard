@@ -30,7 +30,7 @@ struct PiFormula: FormulaProtocol {
     }
 
     var mode: NumbersView.Mode {
-        .decimal
+        .fraction
     }
 }
 
