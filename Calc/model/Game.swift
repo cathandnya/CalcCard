@@ -117,19 +117,19 @@ class Game: ObservableObject {
         stages = []
         
         for _ in 0 ..< 3 {
-            let value = Game.randomSource.nextInt(upperBound: 100)
+            let value = Game.randomSource.nextInt(upperBound: 99) + 1
             let source = DistanceUnit.random()
             stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: source.next()))
         }
         
         for _ in 0 ..< 3 {
-            let value = Game.randomSource.nextInt(upperBound: 100)
+            let value = Game.randomSource.nextInt(upperBound: 99) + 1
             let source = AreaUnit.random()
             stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: source.next()))
         }
 
         for _ in 0 ..< 3 {
-            let value = Game.randomSource.nextInt(upperBound: 100)
+            let value = Game.randomSource.nextInt(upperBound: 99) + 1
             let source = VolumeUnit.random()
             stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: source.next()))
         }
@@ -137,7 +137,7 @@ class Game: ObservableObject {
         for _ in 0 ..< 3 {
             let source = TimeUnit.random()
             let dest = source.next()
-            let value = Game.randomSource.nextInt(upperBound: 10) * 36
+            let value = (Game.randomSource.nextInt(upperBound: 9) + 1) * 36
             stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: dest))
         }
 

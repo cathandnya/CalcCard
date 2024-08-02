@@ -66,7 +66,7 @@ enum DistanceUnit: UnitProtocol, CaseIterable {
         case .meter:
             return [.milliMeter, .centiMeter, .kiroMeter].randomElement()!
         case .kiroMeter:
-            return [.centiMeter, .meter, .kiroMeter].randomElement()!
+            return [.centiMeter, .meter].randomElement()!
         }
     }
 }
