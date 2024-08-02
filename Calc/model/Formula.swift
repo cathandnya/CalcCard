@@ -28,6 +28,8 @@ struct Formula: FormulaProtocol {
         
         case plus
         case minus
+        case multiply
+        case divide
         
         var label: String {
             switch self {
@@ -35,45 +37,39 @@ struct Formula: FormulaProtocol {
                 return "+"
             case .minus:
                 return "-"
-            }
-        }
-        
-        var name: String {
-            switch self {
-            case .plus:
-                return "たしざん"
-            case .minus:
-                return "ひきざん"
+            case .multiply:
+                return "×"
+            case .divide:
+                return "÷"
             }
         }
     }
     
-    let left: Int
-    let right: Int
+    let left: Double
+    let right: Double
     let `operator`: Operator
     
-    var result: Int {
+    var result: Double {
         switch self.operator {
         case .plus:
             return left + right
         case .minus:
             return left - right
+        case .multiply:
+            return left * right
+        case .divide:
+            return left / right
         }
     }
     
     //
     
     var text: String {
-        switch self.operator {
-        case .plus:
-            return "\(left) + \(right)"
-        case .minus:
-            return "\(left) - \(right)"
-        }
+        "\(left.formattedText) \(self.operator.label) \(right.formattedText)"
     }
     
     var correctAnswer: String {
-        "\(result)"
+        result.formattedText
     }
     
     var mode: NumbersView.Mode {

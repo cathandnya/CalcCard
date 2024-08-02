@@ -18,15 +18,7 @@ struct PiFormula: FormulaProtocol {
 
     var correctAnswer: String {
         let answer = Double(314 * value) / 100
-        let f1 = Int(314 * value) % 100
-        let f2 = f1 % 10
-        if f1 == 0 {
-            return String(format: "%d", Int(answer))
-        } else if f2 == 0 {
-            return String(format: "%.1f", answer)
-        } else {
-            return String(format: "%.2f", answer)
-        }
+        return answer.formattedText
     }
 
     var mode: NumbersView.Mode {

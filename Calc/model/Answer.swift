@@ -29,3 +29,12 @@ struct Answer: Identifiable, Hashable {
         return formula.check(answer: answer)
     }
 }
+
+extension Double {
+    
+    var formattedText: String {
+        let formatter = NumberFormatter()
+        formatter.maximumFractionDigits = 16
+        return formatter.string(from: .init(floatLiteral: self))!
+    }
+}

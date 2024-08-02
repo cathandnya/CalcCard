@@ -12,21 +12,21 @@ import GameplayKit
 class Game: ObservableObject {
     
     enum Mode: String, CaseIterable {
-        case plus
-        case minus
+        case basic
         case pi
         case square
+        case unit
         
         var title: String {
             switch self {
-            case .plus:
-                return "たしざん"
-            case .minus:
-                return "ひきざん"
+            case .basic:
+                return "四則演算"
             case .pi:
                 return "円周率"
             case .square:
                 return "平方数"
+            case .unit:
+                return "単位"
             }
         }
     }
@@ -47,35 +47,43 @@ class Game: ObservableObject {
 
     func reset() {
         switch mode {
-        case .plus:
-            setupPlus()
-        case .minus:
-            setupMinus()
+        case .basic:
+            setupBasic()
         case .pi:
             setupPi()
         case .square:
             setupSquare()
+        case .unit:
+            setupUnit()
         }
         currentFomula = stages[0]
     }
     
-    private func setupPlus() {
+    private func setupBasic() {
         stages = []
         
-        for _ in 0 ..< 16 {
+        for _ in 0 ..< 4 {
             let left = Game.randomSource.nextInt(upperBound: 120)
             let right = Game.randomSource.nextInt(upperBound: 120)
-            stages.append(Formula(left: left, right: right, operator: .plus))
+            stages.append(Formula(left: Double(left), right: Double(right), operator: .plus))
         }
-    }
 
-    private func setupMinus() {
-        stages = []
-
-        for _ in 0 ..< 16 {
+        for _ in 0 ..< 4 {
             let left = Game.randomSource.nextInt(upperBound: 70) + 50
             let right = Game.randomSource.nextInt(upperBound: left)
-            stages.append(Formula(left: left, right: right, operator: .minus))
+            stages.append(Formula(left: Double(left), right: Double(right), operator: .minus))
+        }
+
+        for _ in 0 ..< 4 {
+            let left = Game.randomSource.nextInt(upperBound: 120)
+            let right = Game.randomSource.nextInt(upperBound: 8) + 2
+            stages.append(Formula(left: Double(left), right: Double(right), operator: .multiply))
+        }
+
+        for _ in 0 ..< 4 {
+            let right = Game.randomSource.nextInt(upperBound: 8) + 2
+            let left = Game.randomSource.nextInt(upperBound: 100) * right
+            stages.append(Formula(left: Double(left), right: Double(right), operator: .divide))
         }
     }
     
@@ -103,6 +111,42 @@ class Game: ObservableObject {
         for value in 21 ..< 30 {
             stages.append(SquareFormula(value: value))
         }
+    }
+
+    private func setupUnit() {
+        stages = []
+        
+        for _ in 0 ..< 3 {
+            let value = Game.randomSource.nextInt(upperBound: 100)
+            let source = DistanceUnit.random()
+            stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: source.next()))
+        }
+        
+        for _ in 0 ..< 3 {
+            let value = Game.randomSource.nextInt(upperBound: 100)
+            let source = AreaUnit.random()
+            stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: source.next()))
+        }
+
+        for _ in 0 ..< 3 {
+            let value = Game.randomSource.nextInt(upperBound: 100)
+            let source = VolumeUnit.random()
+            stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: source.next()))
+        }
+
+        for _ in 0 ..< 3 {
+            let source = TimeUnit.random()
+            let dest = source.next()
+            let value = Game.randomSource.nextInt(upperBound: 10) * 36
+            stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: dest))
+        }
+
+        /*
+        for _ in 0 ..< 3 {
+            let value = Game.randomSource.nextInt(upperBound: 20) * 60
+            let source = SpeedUnit.random()
+            stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: source.next()))
+        }*/
     }
 
     func next() {

@@ -152,6 +152,6 @@ struct GameView_Previews: PreviewProvider {
     
     static var previews: some View {
         GameView(path: .constant(.init()))
-            .environmentObject(Game(mode: .plus))
+            .environmentObject(Game(mode: .basic))
     }
 }

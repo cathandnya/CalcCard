@@ -109,7 +109,6 @@ struct NumbersView: View {
                                 .frame(width: 80, height: 80)
                                 .border(Color.blue, width: 1)
                         }
-                        .disabled(value.isEmpty)
                     }
                     if mode == .fraction {
                         Button(action: {
