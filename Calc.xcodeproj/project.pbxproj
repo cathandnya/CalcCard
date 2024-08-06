@@ -19,6 +19,10 @@
 		0E4CDAAD24F90B0E00A4F279 /* CalculationCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */; };
 		0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */; };
 		0E630ADF2C5B79B800F58E26 /* UnitFormula.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E630ADE2C5B79B800F58E26 /* UnitFormula.swift */; };
+		0E630AEE2C61A5C800F58E26 /* card_pdf in Resources */ = {isa = PBXBuildFile; fileRef = 0E630AED2C61A5C800F58E26 /* card_pdf */; };
+		0E630AF02C61A5EC00F58E26 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E630AEF2C61A5EC00F58E26 /* MemoryCard.swift */; };
+		0E630AF22C61A6FD00F58E26 /* UIImage+PDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E630AF12C61A6FD00F58E26 /* UIImage+PDF.swift */; };
+		0E630AF42C61AEEF00F58E26 /* MemoryCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E630AF32C61AEEF00F58E26 /* MemoryCardsView.swift */; };
 		0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */; };
 		0E93A03D2C3CFF5E0060994D /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E93A03C2C3CFF5E0060994D /* AppView.swift */; };
 		0E93A03F2C3D05770060994D /* ResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E93A03E2C3D05770060994D /* ResultsView.swift */; };
@@ -42,6 +46,10 @@
 		0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationCardView.swift; sourceTree = "<group>"; };
 		0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
 		0E630ADE2C5B79B800F58E26 /* UnitFormula.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitFormula.swift; sourceTree = "<group>"; };
+		0E630AED2C61A5C800F58E26 /* card_pdf */ = {isa = PBXFileReference; lastKnownFileType = folder; path = card_pdf; sourceTree = "<group>"; };
+		0E630AEF2C61A5EC00F58E26 /* MemoryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCard.swift; sourceTree = "<group>"; };
+		0E630AF12C61A6FD00F58E26 /* UIImage+PDF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PDF.swift"; sourceTree = "<group>"; };
+		0E630AF32C61AEEF00F58E26 /* MemoryCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryCardsView.swift; sourceTree = "<group>"; };
 		0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceRecognizer.swift; sourceTree = "<group>"; };
 		0E93A03C2C3CFF5E0060994D /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		0E93A03E2C3D05770060994D /* ResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsView.swift; sourceTree = "<group>"; };
@@ -86,13 +94,16 @@
 				0E4CDAAC24F90B0E00A4F279 /* CalculationCardView.swift */,
 				0E4CDAAE24F90EF500A4F279 /* NumbersView.swift */,
 				0E93A03E2C3D05770060994D /* ResultsView.swift */,
+				0E630AF32C61AEEF00F58E26 /* MemoryCardsView.swift */,
 				0E938DEB250CD2F200D19EF5 /* VoiceRecognizer.swift */,
 				0E19C15E2C4CF3B9003D3CC5 /* AlertItem.swift */,
+				0E630AF12C61A6FD00F58E26 /* UIImage+PDF.swift */,
 				0E4CDA9524F8F7CD00A4F279 /* Assets.xcassets */,
 				0E4CDA9A24F8F7CD00A4F279 /* LaunchScreen.storyboard */,
 				0E4CDA9D24F8F7CD00A4F279 /* Info.plist */,
 				0EF0CEF2250CFF7000AC261A /* InfoPlist.strings */,
 				0E4CDAA324F8F83B00A4F279 /* model */,
+				0E630AED2C61A5C800F58E26 /* card_pdf */,
 				0E4CDA9724F8F7CD00A4F279 /* Preview Content */,
 			);
 			path = Calc;
@@ -114,6 +125,7 @@
 				0E630ADE2C5B79B800F58E26 /* UnitFormula.swift */,
 				0E4CDAA824F8FE5000A4F279 /* Answer.swift */,
 				0E4CDAA624F8FB6E00A4F279 /* Game.swift */,
+				0E630AEF2C61A5EC00F58E26 /* MemoryCard.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -185,6 +197,7 @@
 				0E4CDA9C24F8F7CD00A4F279 /* LaunchScreen.storyboard in Resources */,
 				0EF0CEF3250CFF7000AC261A /* InfoPlist.strings in Resources */,
 				0E4CDA9924F8F7CD00A4F279 /* Preview Assets.xcassets in Resources */,
+				0E630AEE2C61A5C800F58E26 /* card_pdf in Resources */,
 				0E4CDA9624F8F7CD00A4F279 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,6 +211,7 @@
 			files = (
 				0E93A03D2C3CFF5E0060994D /* AppView.swift in Sources */,
 				0E19C15F2C4CF3B9003D3CC5 /* AlertItem.swift in Sources */,
+				0E630AF02C61A5EC00F58E26 /* MemoryCard.swift in Sources */,
 				0E4CDAAD24F90B0E00A4F279 /* CalculationCardView.swift in Sources */,
 				0E4CDAA724F8FB6E00A4F279 /* Game.swift in Sources */,
 				0E4CDAAF24F90EF500A4F279 /* NumbersView.swift in Sources */,
@@ -206,8 +220,10 @@
 				0E93A03F2C3D05770060994D /* ResultsView.swift in Sources */,
 				0E4CDAA924F8FE5000A4F279 /* Answer.swift in Sources */,
 				0E938DEC250CD2F200D19EF5 /* VoiceRecognizer.swift in Sources */,
+				0E630AF42C61AEEF00F58E26 /* MemoryCardsView.swift in Sources */,
 				0E4CDAA524F8F86B00A4F279 /* Formula.swift in Sources */,
 				0E4CDA9424F8F7C700A4F279 /* ContentView.swift in Sources */,
+				0E630AF22C61A6FD00F58E26 /* UIImage+PDF.swift in Sources */,
 				0E4CDAAB24F9096200A4F279 /* GameView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,6 +375,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.cathand.Calc;
 				PRODUCT_NAME = CalcCard;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -383,6 +400,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.cathand.Calc;
 				PRODUCT_NAME = CalcCard;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

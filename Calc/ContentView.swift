@@ -19,8 +19,11 @@ struct ContentView: View {
                 ForEach(Game.Mode.allCases, id: \.self) { mode in
                     NavigationLink(mode.title, value: mode)
                         .font(.system(size: 32, weight: .semibold))
-                        .padding(.vertical, 30)
+                        .padding(.vertical, 20)
                 }
+                NavigationLink("植物カード", value: MemoryCards(cards: MemoryCard.load(url: Bundle.main.url(forResource: "card_pdf/plants", withExtension: "pdf")!)))
+                    .font(.system(size: 32, weight: .semibold))
+                    .padding(.vertical, 20)
                 Spacer()
                 HStack {
                     Spacer()
@@ -36,6 +39,9 @@ struct ContentView: View {
             }
             .navigationDestination(for: GameResult.self) { value in
                 ResultsView(path: $path, results: value.results)
+            }
+            .navigationDestination(for: MemoryCards.self) { value in
+                MemoryCardsView(path: $path, cards: value.cards)
             }
         }
     }
