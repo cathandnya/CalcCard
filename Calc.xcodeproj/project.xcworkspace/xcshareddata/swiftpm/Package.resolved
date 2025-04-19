@@ -1,6 +1,15 @@
 {
-  "originHash" : "17c5501bd09cf9cd5728b096b268b2f63f76f54dc34ec192d3dcb9be9853ee26",
+  "originHash" : "562b15ef26ba2b9f69946b06a7c402b04bec52979d248473fbbb44a1a8771a77",
   "pins" : [
+    {
+      "identity" : "csv.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/yaslab/CSV.swift",
+      "state" : {
+        "revision" : "b4371dc833ba22ab6ead90fb63d267c3cf9ce773",
+        "version" : "2.5.2"
+      }
+    },
     {
       "identity" : "swift-system-sound",
       "kind" : "remoteSourceControl",

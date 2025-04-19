@@ -8,6 +8,7 @@
 
 import Foundation
 import GameplayKit
+import CSV
 
 class Game: ObservableObject {
     
@@ -16,6 +17,7 @@ class Game: ObservableObject {
         case pi
         case square
         case unit
+        case historyYear
         
         var title: String {
             switch self {
@@ -27,6 +29,8 @@ class Game: ObservableObject {
                 return "平方数"
             case .unit:
                 return "単位"
+            case .historyYear:
+                return "歴史年号"
             }
         }
     }
@@ -55,6 +59,8 @@ class Game: ObservableObject {
             setupSquare()
         case .unit:
             setupUnit()
+        case .historyYear:
+            setupHistoryYear()
         }
         currentFomula = stages[0]
     }
@@ -147,6 +153,21 @@ class Game: ObservableObject {
             let source = SpeedUnit.random()
             stages.append(UnitFormula(value: Double(value), sourceUnit: source, destinationUnit: source.next()))
         }*/
+    }
+    
+    private func setupHistoryYear() {
+        // local file
+        let fileName = "重要年代-1"
+        guard let filePath = Bundle.main.path(forResource: fileName, ofType: "csv") else { return }
+        guard let stream = InputStream(fileAtPath: filePath) else { return }
+        guard let csv = try? CSVReader(stream: stream) else { return }
+        csv.next() // skip header
+
+        stages = []
+        while let row = csv.next() {
+            guard row.count == 2 else { continue }
+            stages.append(HistoryYearFormula(title: row[0], year: row[1]))
+        }
     }
 
     func next() {
