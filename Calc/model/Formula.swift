@@ -13,6 +13,7 @@ protocol FormulaProtocol {
     var text: String { get }
     var correctAnswer: String { get }
     var mode: NumbersView.Mode { get }
+    var correctAnswerText: String { get }
 }
 
 extension FormulaProtocol {
@@ -74,5 +75,9 @@ struct Formula: FormulaProtocol {
     
     var mode: NumbersView.Mode {
         .digits
+    }
+    
+    var correctAnswerText: String {
+        "答えは\(correctAnswer)です。"
     }
 }

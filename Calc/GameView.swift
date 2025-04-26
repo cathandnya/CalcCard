@@ -88,7 +88,7 @@ struct GameView: View {
         } else {
             self.alert = .init(alert: Alert(
                 title: Text(answer.answer == nil ? "時間切れ" : "まちがい！"),
-                message: Text("答えは\(answer.formula.correctAnswer)です。"),
+                message: Text(answer.formula.correctAnswerText),
                 dismissButton: .default(Text("はい"), action: {
                     next()
                 })))

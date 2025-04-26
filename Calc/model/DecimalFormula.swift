@@ -24,21 +24,29 @@ struct PiFormula: FormulaProtocol {
     var mode: NumbersView.Mode {
         .fraction
     }
+    
+    var correctAnswerText: String {
+        "答えは\(correctAnswer)です。"
+    }
 }
 
 struct SquareFormula: FormulaProtocol {
     
     let value: Int
-
+    
     var text: String {
         "\(value) x \(value)"
     }
-
+    
     var correctAnswer: String {
         "\(value * value)"
     }
     
     var mode: NumbersView.Mode {
         .digits
+    }
+        
+    var correctAnswerText: String {
+        "答えは\(correctAnswer)です。"
     }
 }

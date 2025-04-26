@@ -296,4 +296,8 @@ struct UnitFormula: FormulaProtocol {
     var mode: NumbersView.Mode {
         .fraction
     }
+    
+    var correctAnswerText: String {
+        "答えは\(correctAnswer)です。"
+    }
 }
