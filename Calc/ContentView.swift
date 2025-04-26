@@ -14,22 +14,24 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            VStack {
-                Spacer()
-                ForEach(Game.Mode.allCases, id: \.self) { mode in
-                    NavigationLink(mode.title, value: mode)
+            ScrollView {
+                VStack {
+                    Spacer()
+                    ForEach(Game.Mode.allCases, id: \.self) { mode in
+                        NavigationLink(mode.title, value: mode)
+                            .font(.system(size: 32, weight: .semibold))
+                            .padding(.vertical, 20)
+                    }
+                    NavigationLink("植物カード", value: MemoryCards(cards: MemoryCard.load(url: Bundle.main.url(forResource: "card_pdf/plants", withExtension: "pdf")!)))
                         .font(.system(size: 32, weight: .semibold))
                         .padding(.vertical, 20)
-                }
-                NavigationLink("植物カード", value: MemoryCards(cards: MemoryCard.load(url: Bundle.main.url(forResource: "card_pdf/plants", withExtension: "pdf")!)))
-                    .font(.system(size: 32, weight: .semibold))
-                    .padding(.vertical, 20)
-                Spacer()
-                HStack {
                     Spacer()
-                    Text("Version: \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String) (\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String))")
-                        .font(.system(size: 12))
-                    Spacer()
+                    HStack {
+                        Spacer()
+                        Text("Version: \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String) (\(Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String))")
+                            .font(.system(size: 12))
+                        Spacer()
+                    }
                 }
             }
             .navigationBarTitle(Text("けいさんカード"))

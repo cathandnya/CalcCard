@@ -17,8 +17,10 @@ class Game: ObservableObject {
         case pi
         case square
         case unit
-        case historyYear
-        
+        case historyYear1
+        case historyYear2
+        case historyYear3
+
         var title: String {
             switch self {
             case .basic:
@@ -29,8 +31,12 @@ class Game: ObservableObject {
                 return "平方数"
             case .unit:
                 return "単位"
-            case .historyYear:
-                return "歴史年号"
+            case .historyYear1:
+                return "歴史年号1"
+            case .historyYear2:
+                return "歴史年号2"
+            case .historyYear3:
+                return "歴史年号3"
             }
         }
     }
@@ -59,8 +65,12 @@ class Game: ObservableObject {
             setupSquare()
         case .unit:
             setupUnit()
-        case .historyYear:
-            setupHistoryYear()
+        case .historyYear1:
+            setupHistoryYear(index: 1)
+        case .historyYear2:
+            setupHistoryYear(index: 2)
+        case .historyYear3:
+            setupHistoryYear(index: 3)
         }
         currentFomula = stages[0]
     }
@@ -155,9 +165,9 @@ class Game: ObservableObject {
         }*/
     }
     
-    private func setupHistoryYear() {
+    private func setupHistoryYear(index: Int) {
         // local file
-        let fileName = "重要年代-1"
+        let fileName = "重要年代-\(index)"
         guard let filePath = Bundle.main.path(forResource: fileName, ofType: "csv") else { return }
         guard let stream = InputStream(fileAtPath: filePath) else { return }
         guard let csv = try? CSVReader(stream: stream) else { return }
