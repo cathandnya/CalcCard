@@ -39,12 +39,23 @@ class Game: ObservableObject {
                 return "歴史年号3"
             }
         }
+        
+        var defaultRandom: Bool {
+            switch self {
+            case .basic, .pi, .square, .unit:
+                return true
+            case .historyYear1, .historyYear2, .historyYear3:
+                return false
+            }
+        }
     }
     
     let mode: Mode
+    let random: Bool
     
-    init(mode: Mode) {
+    init(mode: Mode, random: Bool = true) {
         self.mode = mode
+        self.random = random
         reset()
     }
     
@@ -181,7 +192,7 @@ class Game: ObservableObject {
     }
 
     func next() {
-        let randomNumber = Game.randomSource.nextInt(upperBound: stages.count)
+        let randomNumber = random ? Game.randomSource.nextInt(upperBound: stages.count) : 0
         currentFomula = stages.remove(at: randomNumber)
     }
     

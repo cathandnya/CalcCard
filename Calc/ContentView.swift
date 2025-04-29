@@ -37,7 +37,7 @@ struct ContentView: View {
             .navigationBarTitle(Text("けいさんカード"))
             .navigationDestination(for: Game.Mode.self) { mode in
                 GameView(path: $path, time: nil)
-                    .environmentObject(Game(mode: mode))
+                    .environmentObject(Game(mode: mode, random: mode.defaultRandom))
             }
             .navigationDestination(for: GameResult.self) { value in
                 ResultsView(path: $path, results: value.results)
