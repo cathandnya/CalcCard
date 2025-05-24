@@ -20,6 +20,7 @@ class Game: ObservableObject {
         case historyYear1
         case historyYear2
         case historyYear3
+        case historyYear1_3
 
         var title: String {
             switch self {
@@ -37,6 +38,8 @@ class Game: ObservableObject {
                 return "歴史年号2"
             case .historyYear3:
                 return "歴史年号3"
+            case .historyYear1_3:
+                return "歴史年号1〜3"
             }
         }
         
@@ -46,6 +49,8 @@ class Game: ObservableObject {
                 return true
             case .historyYear1, .historyYear2, .historyYear3:
                 return false
+            case .historyYear1_3:
+                return true;
             }
         }
     }
@@ -82,6 +87,10 @@ class Game: ObservableObject {
             setupHistoryYear(index: 2)
         case .historyYear3:
             setupHistoryYear(index: 3)
+        case .historyYear1_3:
+            setupHistoryYear(index: 1)
+            setupHistoryYear(index: 2, clear: false)
+            setupHistoryYear(index: 3, clear: false)
         }
         currentFomula = stages[0]
     }
@@ -176,7 +185,7 @@ class Game: ObservableObject {
         }*/
     }
     
-    private func setupHistoryYear(index: Int) {
+    private func setupHistoryYear(index: Int, clear: Bool = true) {
         // local file
         let fileName = "重要年代-\(index)"
         guard let filePath = Bundle.main.path(forResource: fileName, ofType: "csv") else { return }
@@ -184,7 +193,9 @@ class Game: ObservableObject {
         guard let csv = try? CSVReader(stream: stream) else { return }
         csv.next() // skip header
 
-        stages = []
+        if clear {
+            stages = []
+        }
         while let row = csv.next() {
             guard row.count == 2 else { continue }
             stages.append(HistoryYearFormula(title: row[0], year: row[1]))
